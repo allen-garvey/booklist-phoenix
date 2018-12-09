@@ -13,10 +13,10 @@
         <div class="container nav_container">
           <a href="" class="brand nav_heading">Booklist</a>
           <ul class='nav_links clearfix'>
-            <li><a href=""></a>Books</li>
-            <li><a href="">Bookshelf</li>
-            <li><a href="">Libraries</li>
-            <li><a href="">Lists</li>
+            <li><a href="">Books</a></li>
+            <li><a href="">Bookshelf</a></li>
+            <li><a href="">Libraries</a></li>
+            <li><a href="">Lists</a></li>
             <li><a href="" class="btn btn-success">Add Book</a></li>
           </ul>
         </div>
