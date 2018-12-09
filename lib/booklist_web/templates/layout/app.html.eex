@@ -4,27 +4,47 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Booklist · Phoenix Framework</title>
+    <title>Booklist</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+    <div class="total">
+      <nav class='nav'>
+        <div class="container nav_container">
+          <a href="" class="brand nav_heading">Booklist</a>
+          <ul class='nav_links clearfix'>
+            <li><a href=""></a>Books</li>
+            <li><a href="">Bookshelf</li>
+            <li><a href="">Libraries</li>
+            <li><a href="">Lists</li>
+            <li><a href="" class="btn btn-success">Add Book</a></li>
           </ul>
-        </nav>
-        <a href="http://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        </div>
+      </nav>
       <%= render @view_module, @view_template, assigns %>
-    </main>
+    </div>
+    <div class="footer">
+      <ul class="footer_links container">
+        <li><a href="">All Fields</a></li>
+        <li><a href="">Add Author</a></li>
+        <li><a href="">Library Items</a></li>
+        <li><a href="">Inactive books</a></li>
+        <li><a href="">Reporting</a></li>
+      </ul>
+    </div>
+    <div class="modal_container" id="modal_container" style="display:none;">
+      <div class="modal_overlay" id="modal_overlay"></div>
+      <div class="modal" id="modal">
+        <div class="modal_body" id="modal_body"></div>
+        <div class="modal_buttons modal_confirm_buttons">
+          <button class="btn btn-default" id="modal_confirm_cancel"></button>
+          <button class="btn btn-danger" id="modal_confirm_confirm"></button>
+        </div>
+        <div class="modal_buttons modal_alert_buttons">
+          <button class="btn btn-default" id="modal_alert_confirm"></button>
+        </div>
+        </div>
+    </div>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
