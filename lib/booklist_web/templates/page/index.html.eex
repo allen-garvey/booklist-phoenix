@@ -1,35 +1,25 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<header class="home_header">
+  <div class="container">
+    <h1 class="home_heading">Booklist</h1>  
+      <p class="tagline">All your books, all in one place</p>
+  </div>
+</header>
+<div class="container home_section_container">
+  <div class="home_section">
+    <h2 class="home_section_heading"><a href="">Books</a></h2>
+    <p class="description">All your books</p>
+    <a href="" class="btn btn-success">Add Book</a>
+  </div>
+  <div class="home_section">
+    <h2 class="home_section_heading"><a href="">Bookshelf</a></h2>
+    <p class="description">What's on your bookshelf now</p>
+  </div>
+  <div class="home_section">
+    <h2 class="home_section_heading"><a href="">Lists</a></h2>
+    <p class="description">Lists of books to read</p>
+  </div>
+  <div class="home_section">
+    <h2 class="home_section_heading"><a href="">Libraries</a></h2>
+    <p class="description">Where all your books are</p>
+  </div>
+</div>
