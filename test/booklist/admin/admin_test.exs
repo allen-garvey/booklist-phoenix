@@ -120,4 +120,67 @@ defmodule Booklist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_list(list)
     end
   end
+
+  describe "authors" do
+    alias Booklist.Admin.Author
+
+    @valid_attrs %{first_name: "some first_name", last_name: "some last_name", middle_name: "some middle_name"}
+    @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name", middle_name: "some updated middle_name"}
+    @invalid_attrs %{first_name: nil, last_name: nil, middle_name: nil}
+
+    def author_fixture(attrs \\ %{}) do
+      {:ok, author} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_author()
+
+      author
+    end
+
+    test "list_authors/0 returns all authors" do
+      author = author_fixture()
+      assert Admin.list_authors() == [author]
+    end
+
+    test "get_author!/1 returns the author with given id" do
+      author = author_fixture()
+      assert Admin.get_author!(author.id) == author
+    end
+
+    test "create_author/1 with valid data creates a author" do
+      assert {:ok, %Author{} = author} = Admin.create_author(@valid_attrs)
+      assert author.first_name == "some first_name"
+      assert author.last_name == "some last_name"
+      assert author.middle_name == "some middle_name"
+    end
+
+    test "create_author/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_author(@invalid_attrs)
+    end
+
+    test "update_author/2 with valid data updates the author" do
+      author = author_fixture()
+      assert {:ok, %Author{} = author} = Admin.update_author(author, @update_attrs)
+      assert author.first_name == "some updated first_name"
+      assert author.last_name == "some updated last_name"
+      assert author.middle_name == "some updated middle_name"
+    end
+
+    test "update_author/2 with invalid data returns error changeset" do
+      author = author_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_author(author, @invalid_attrs)
+      assert author == Admin.get_author!(author.id)
+    end
+
+    test "delete_author/1 deletes the author" do
+      author = author_fixture()
+      assert {:ok, %Author{}} = Admin.delete_author(author)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_author!(author.id) end
+    end
+
+    test "change_author/1 returns a author changeset" do
+      author = author_fixture()
+      assert %Ecto.Changeset{} = Admin.change_author(author)
+    end
+  end
 end
