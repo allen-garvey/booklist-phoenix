@@ -1,0 +1,28 @@
+<h1>Show Book</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @book.title %>
+  </li>
+
+  <li>
+    <strong>Sort title:</strong>
+    <%= @book.sort_title %>
+  </li>
+
+  <li>
+    <strong>Subtitle:</strong>
+    <%= @book.subtitle %>
+  </li>
+
+  <li>
+    <strong>Is fiction:</strong>
+    <%= @book.is_fiction %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.book_path(@conn, :edit, @book) %></span>
+<span><%= link "Back", to: Routes.book_path(@conn, :index) %></span>

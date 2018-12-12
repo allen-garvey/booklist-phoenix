@@ -1,0 +1,32 @@
+<h1>Listing Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Sort title</th>
+      <th>Subtitle</th>
+      <th>Is fiction</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for book <- @books do %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.sort_title %></td>
+      <td><%= book.subtitle %></td>
+      <td><%= book.is_fiction %></td>
+
+      <td>
+        <%= link "Show", to: Routes.book_path(@conn, :show, book) %>
+        <%= link "Edit", to: Routes.book_path(@conn, :edit, book) %>
+        <%= link "Delete", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Book", to: Routes.book_path(@conn, :new) %></span>

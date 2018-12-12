@@ -183,4 +183,69 @@ defmodule Booklist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_author(author)
     end
   end
+
+  describe "books" do
+    alias Booklist.Admin.Book
+
+    @valid_attrs %{is_fiction: true, sort_title: "some sort_title", subtitle: "some subtitle", title: "some title"}
+    @update_attrs %{is_fiction: false, sort_title: "some updated sort_title", subtitle: "some updated subtitle", title: "some updated title"}
+    @invalid_attrs %{is_fiction: nil, sort_title: nil, subtitle: nil, title: nil}
+
+    def book_fixture(attrs \\ %{}) do
+      {:ok, book} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_book()
+
+      book
+    end
+
+    test "list_books/0 returns all books" do
+      book = book_fixture()
+      assert Admin.list_books() == [book]
+    end
+
+    test "get_book!/1 returns the book with given id" do
+      book = book_fixture()
+      assert Admin.get_book!(book.id) == book
+    end
+
+    test "create_book/1 with valid data creates a book" do
+      assert {:ok, %Book{} = book} = Admin.create_book(@valid_attrs)
+      assert book.is_fiction == true
+      assert book.sort_title == "some sort_title"
+      assert book.subtitle == "some subtitle"
+      assert book.title == "some title"
+    end
+
+    test "create_book/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_book(@invalid_attrs)
+    end
+
+    test "update_book/2 with valid data updates the book" do
+      book = book_fixture()
+      assert {:ok, %Book{} = book} = Admin.update_book(book, @update_attrs)
+      assert book.is_fiction == false
+      assert book.sort_title == "some updated sort_title"
+      assert book.subtitle == "some updated subtitle"
+      assert book.title == "some updated title"
+    end
+
+    test "update_book/2 with invalid data returns error changeset" do
+      book = book_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_book(book, @invalid_attrs)
+      assert book == Admin.get_book!(book.id)
+    end
+
+    test "delete_book/1 deletes the book" do
+      book = book_fixture()
+      assert {:ok, %Book{}} = Admin.delete_book(book)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_book!(book.id) end
+    end
+
+    test "change_book/1 returns a book changeset" do
+      book = book_fixture()
+      assert %Ecto.Changeset{} = Admin.change_book(book)
+    end
+  end
 end

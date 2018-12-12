@@ -18,9 +18,10 @@ defmodule BooklistWeb.Router do
 
     get "/", PageController, :index
 
+    resources "/authors", AuthorController
+    resources "/books", BookController
     resources "/genres", GenreController
     resources "/lists", ListController
-    resources "/authors", AuthorController
   end
 
   # Other scopes may use custom stacks.
