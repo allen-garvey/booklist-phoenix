@@ -8,5 +8,7 @@ defmodule Booklist.Repo.Migrations.CreateLists do
       timestamps()
     end
 
+    create unique_index(:lists, [:name])
+
   end
 end

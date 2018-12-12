@@ -8,5 +8,7 @@ defmodule Booklist.Repo.Migrations.CreateGenres do
       timestamps()
     end
 
+    create unique_index(:genres, [:name])
+
   end
 end
