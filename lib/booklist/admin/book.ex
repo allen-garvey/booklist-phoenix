@@ -15,11 +15,28 @@ defmodule Booklist.Admin.Book do
     timestamps()
   end
 
+  @doc """
+  Adds sort_title to changeset generated from title
+  """
+  def generate_sort_title(changeset) do
+    change(changeset, %{sort_title: sort_title_from(get_field(changeset, :title))})
+  end
+
+  def sort_title_from(nil) do
+    nil
+  end
+
+  def sort_title_from(title) do
+    Regex.replace(~r/^the\s+/i, title, "")
+  end
+
   @doc false
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :sort_title, :subtitle, :is_fiction, :genre_id, :author_id])
-    |> validate_required([:title, :sort_title, :is_fiction, :genre_id])
+    # sort_title is required, but we are not validating it here since it generated from the title
+    |> validate_required([:title, :is_fiction, :genre_id])
+    |> generate_sort_title
     |> assoc_constraint(:author)
     |> assoc_constraint(:genre)
   end
