@@ -1,0 +1,30 @@
+<h1>Listing Libraries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Super search key</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for library <- @libraries do %>
+    <tr>
+      <td><%= library.name %></td>
+      <td><%= library.url %></td>
+      <td><%= library.super_search_key %></td>
+
+      <td>
+        <%= link "Show", to: Routes.library_path(@conn, :show, library) %>
+        <%= link "Edit", to: Routes.library_path(@conn, :edit, library) %>
+        <%= link "Delete", to: Routes.library_path(@conn, :delete, library), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Library", to: Routes.library_path(@conn, :new) %></span>

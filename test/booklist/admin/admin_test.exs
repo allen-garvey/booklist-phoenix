@@ -248,4 +248,67 @@ defmodule Booklist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_book(book)
     end
   end
+
+  describe "libraries" do
+    alias Booklist.Admin.Library
+
+    @valid_attrs %{name: "some name", super_search_key: "some super_search_key", url: "some url"}
+    @update_attrs %{name: "some updated name", super_search_key: "some updated super_search_key", url: "some updated url"}
+    @invalid_attrs %{name: nil, super_search_key: nil, url: nil}
+
+    def library_fixture(attrs \\ %{}) do
+      {:ok, library} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_library()
+
+      library
+    end
+
+    test "list_libraries/0 returns all libraries" do
+      library = library_fixture()
+      assert Admin.list_libraries() == [library]
+    end
+
+    test "get_library!/1 returns the library with given id" do
+      library = library_fixture()
+      assert Admin.get_library!(library.id) == library
+    end
+
+    test "create_library/1 with valid data creates a library" do
+      assert {:ok, %Library{} = library} = Admin.create_library(@valid_attrs)
+      assert library.name == "some name"
+      assert library.super_search_key == "some super_search_key"
+      assert library.url == "some url"
+    end
+
+    test "create_library/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_library(@invalid_attrs)
+    end
+
+    test "update_library/2 with valid data updates the library" do
+      library = library_fixture()
+      assert {:ok, %Library{} = library} = Admin.update_library(library, @update_attrs)
+      assert library.name == "some updated name"
+      assert library.super_search_key == "some updated super_search_key"
+      assert library.url == "some updated url"
+    end
+
+    test "update_library/2 with invalid data returns error changeset" do
+      library = library_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_library(library, @invalid_attrs)
+      assert library == Admin.get_library!(library.id)
+    end
+
+    test "delete_library/1 deletes the library" do
+      library = library_fixture()
+      assert {:ok, %Library{}} = Admin.delete_library(library)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_library!(library.id) end
+    end
+
+    test "change_library/1 returns a library changeset" do
+      library = library_fixture()
+      assert %Ecto.Changeset{} = Admin.change_library(library)
+    end
+  end
 end

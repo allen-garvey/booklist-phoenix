@@ -21,6 +21,7 @@ defmodule BooklistWeb.Router do
     resources "/authors", AuthorController
     resources "/books", BookController
     resources "/genres", GenreController
+    resources "/libraries", LibraryController
     resources "/lists", ListController
   end
 
