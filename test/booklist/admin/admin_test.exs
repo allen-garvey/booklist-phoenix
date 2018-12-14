@@ -311,4 +311,65 @@ defmodule Booklist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_library(library)
     end
   end
+
+  describe "loans" do
+    alias Booklist.Admin.Loan
+
+    @valid_attrs %{due_date: ~D[2010-04-17], item_count: 42}
+    @update_attrs %{due_date: ~D[2011-05-18], item_count: 43}
+    @invalid_attrs %{due_date: nil, item_count: nil}
+
+    def loan_fixture(attrs \\ %{}) do
+      {:ok, loan} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_loan()
+
+      loan
+    end
+
+    test "list_loans/0 returns all loans" do
+      loan = loan_fixture()
+      assert Admin.list_loans() == [loan]
+    end
+
+    test "get_loan!/1 returns the loan with given id" do
+      loan = loan_fixture()
+      assert Admin.get_loan!(loan.id) == loan
+    end
+
+    test "create_loan/1 with valid data creates a loan" do
+      assert {:ok, %Loan{} = loan} = Admin.create_loan(@valid_attrs)
+      assert loan.due_date == ~D[2010-04-17]
+      assert loan.item_count == 42
+    end
+
+    test "create_loan/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_loan(@invalid_attrs)
+    end
+
+    test "update_loan/2 with valid data updates the loan" do
+      loan = loan_fixture()
+      assert {:ok, %Loan{} = loan} = Admin.update_loan(loan, @update_attrs)
+      assert loan.due_date == ~D[2011-05-18]
+      assert loan.item_count == 43
+    end
+
+    test "update_loan/2 with invalid data returns error changeset" do
+      loan = loan_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_loan(loan, @invalid_attrs)
+      assert loan == Admin.get_loan!(loan.id)
+    end
+
+    test "delete_loan/1 deletes the loan" do
+      loan = loan_fixture()
+      assert {:ok, %Loan{}} = Admin.delete_loan(loan)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_loan!(loan.id) end
+    end
+
+    test "change_loan/1 returns a loan changeset" do
+      loan = loan_fixture()
+      assert %Ecto.Changeset{} = Admin.change_loan(loan)
+    end
+  end
 end

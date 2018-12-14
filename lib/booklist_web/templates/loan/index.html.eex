@@ -1,0 +1,28 @@
+<h1>Listing Loans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Due date</th>
+      <th>Item count</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for loan <- @loans do %>
+    <tr>
+      <td><%= loan.due_date %></td>
+      <td><%= loan.item_count %></td>
+
+      <td>
+        <%= link "Show", to: Routes.loan_path(@conn, :show, loan) %>
+        <%= link "Edit", to: Routes.loan_path(@conn, :edit, loan) %>
+        <%= link "Delete", to: Routes.loan_path(@conn, :delete, loan), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Loan", to: Routes.loan_path(@conn, :new) %></span>

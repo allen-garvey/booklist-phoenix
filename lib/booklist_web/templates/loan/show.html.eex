@@ -1,0 +1,18 @@
+<h1>Show Loan</h1>
+
+<ul>
+
+  <li>
+    <strong>Due date:</strong>
+    <%= @loan.due_date %>
+  </li>
+
+  <li>
+    <strong>Item count:</strong>
+    <%= @loan.item_count %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.loan_path(@conn, :edit, @loan) %></span>
+<span><%= link "Back", to: Routes.loan_path(@conn, :index) %></span>
