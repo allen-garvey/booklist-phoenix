@@ -5,6 +5,8 @@ defmodule Booklist.Admin.Book do
 
   schema "books" do
     field :is_fiction, :boolean, default: false
+    field :is_active, :boolean, default: true
+    field :on_bookshelf, :boolean, default: false
     field :sort_title, :string
     field :subtitle, :string
     field :title, :string
@@ -33,8 +35,9 @@ defmodule Booklist.Admin.Book do
   @doc false
   def changeset(book, attrs) do
     book
-    |> cast(attrs, [:title, :sort_title, :subtitle, :is_fiction, :genre_id, :author_id])
+    |> cast(attrs, [:title, :sort_title, :subtitle, :is_fiction, :genre_id, :author_id, :is_active, :on_bookshelf])
     # sort_title is required, but we are not validating it here since it generated from the title
+    #is_active and on_bookshelf is required, but not validating since using defaults if they are not set
     |> validate_required([:title, :is_fiction, :genre_id])
     |> generate_sort_title
     |> assoc_constraint(:author)
