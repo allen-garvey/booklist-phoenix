@@ -14,6 +14,8 @@ defmodule Booklist.Admin.Book do
     belongs_to :author, Booklist.Admin.Author
     belongs_to :genre, Booklist.Admin.Genre
 
+    many_to_many :locations, Booklist.Admin.Location, join_through: Booklist.Admin.BookLocation
+
     timestamps()
   end
 

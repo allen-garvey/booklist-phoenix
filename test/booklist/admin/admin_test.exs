@@ -431,4 +431,63 @@ defmodule Booklist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_location(location)
     end
   end
+
+  describe "book_locations" do
+    alias Booklist.Admin.BookLocation
+
+    @valid_attrs %{call_number: "some call_number"}
+    @update_attrs %{call_number: "some updated call_number"}
+    @invalid_attrs %{call_number: nil}
+
+    def book_location_fixture(attrs \\ %{}) do
+      {:ok, book_location} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_book_location()
+
+      book_location
+    end
+
+    test "list_book_locations/0 returns all book_locations" do
+      book_location = book_location_fixture()
+      assert Admin.list_book_locations() == [book_location]
+    end
+
+    test "get_book_location!/1 returns the book_location with given id" do
+      book_location = book_location_fixture()
+      assert Admin.get_book_location!(book_location.id) == book_location
+    end
+
+    test "create_book_location/1 with valid data creates a book_location" do
+      assert {:ok, %BookLocation{} = book_location} = Admin.create_book_location(@valid_attrs)
+      assert book_location.call_number == "some call_number"
+    end
+
+    test "create_book_location/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_book_location(@invalid_attrs)
+    end
+
+    test "update_book_location/2 with valid data updates the book_location" do
+      book_location = book_location_fixture()
+      assert {:ok, %BookLocation{} = book_location} = Admin.update_book_location(book_location, @update_attrs)
+      assert book_location.call_number == "some updated call_number"
+    end
+
+    test "update_book_location/2 with invalid data returns error changeset" do
+      book_location = book_location_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_book_location(book_location, @invalid_attrs)
+      assert book_location == Admin.get_book_location!(book_location.id)
+    end
+
+    test "delete_book_location/1 deletes the book_location" do
+      book_location = book_location_fixture()
+      assert {:ok, %BookLocation{}} = Admin.delete_book_location(book_location)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_book_location!(book_location.id) end
+    end
+
+    test "change_book_location/1 returns a book_location changeset" do
+      book_location = book_location_fixture()
+      assert %Ecto.Changeset{} = Admin.change_book_location(book_location)
+    end
+  end
 end

@@ -1,0 +1,13 @@
+<h1>Show Book location</h1>
+
+<ul>
+
+  <li>
+    <strong>Call number:</strong>
+    <%= @book_location.call_number %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.book_location_path(@conn, :edit, @book_location) %></span>
+<span><%= link "Back", to: Routes.book_location_path(@conn, :index) %></span>

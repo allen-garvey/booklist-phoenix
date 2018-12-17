@@ -677,4 +677,100 @@ defmodule Booklist.Admin do
   def change_location(%Location{} = location) do
     Location.changeset(location, %{})
   end
+
+  alias Booklist.Admin.BookLocation
+
+  @doc """
+  Returns the list of book_locations.
+
+  ## Examples
+
+      iex> list_book_locations()
+      [%BookLocation{}, ...]
+
+  """
+  def list_book_locations do
+    Repo.all(BookLocation)
+  end
+
+  @doc """
+  Gets a single book_location.
+
+  Raises `Ecto.NoResultsError` if the Book location does not exist.
+
+  ## Examples
+
+      iex> get_book_location!(123)
+      %BookLocation{}
+
+      iex> get_book_location!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_book_location!(id), do: Repo.get!(BookLocation, id)
+
+  @doc """
+  Creates a book_location.
+
+  ## Examples
+
+      iex> create_book_location(%{field: value})
+      {:ok, %BookLocation{}}
+
+      iex> create_book_location(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_book_location(attrs \\ %{}) do
+    %BookLocation{}
+    |> BookLocation.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a book_location.
+
+  ## Examples
+
+      iex> update_book_location(book_location, %{field: new_value})
+      {:ok, %BookLocation{}}
+
+      iex> update_book_location(book_location, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_book_location(%BookLocation{} = book_location, attrs) do
+    book_location
+    |> BookLocation.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a BookLocation.
+
+  ## Examples
+
+      iex> delete_book_location(book_location)
+      {:ok, %BookLocation{}}
+
+      iex> delete_book_location(book_location)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_book_location(%BookLocation{} = book_location) do
+    Repo.delete(book_location)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking book_location changes.
+
+  ## Examples
+
+      iex> change_book_location(book_location)
+      %Ecto.Changeset{source: %BookLocation{}}
+
+  """
+  def change_book_location(%BookLocation{} = book_location) do
+    BookLocation.changeset(book_location, %{})
+  end
 end
