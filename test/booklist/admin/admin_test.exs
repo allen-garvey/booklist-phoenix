@@ -372,4 +372,63 @@ defmodule Booklist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_loan(loan)
     end
   end
+
+  describe "locations" do
+    alias Booklist.Admin.Location
+
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+
+    def location_fixture(attrs \\ %{}) do
+      {:ok, location} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_location()
+
+      location
+    end
+
+    test "list_locations/0 returns all locations" do
+      location = location_fixture()
+      assert Admin.list_locations() == [location]
+    end
+
+    test "get_location!/1 returns the location with given id" do
+      location = location_fixture()
+      assert Admin.get_location!(location.id) == location
+    end
+
+    test "create_location/1 with valid data creates a location" do
+      assert {:ok, %Location{} = location} = Admin.create_location(@valid_attrs)
+      assert location.name == "some name"
+    end
+
+    test "create_location/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_location(@invalid_attrs)
+    end
+
+    test "update_location/2 with valid data updates the location" do
+      location = location_fixture()
+      assert {:ok, %Location{} = location} = Admin.update_location(location, @update_attrs)
+      assert location.name == "some updated name"
+    end
+
+    test "update_location/2 with invalid data returns error changeset" do
+      location = location_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_location(location, @invalid_attrs)
+      assert location == Admin.get_location!(location.id)
+    end
+
+    test "delete_location/1 deletes the location" do
+      location = location_fixture()
+      assert {:ok, %Location{}} = Admin.delete_location(location)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_location!(location.id) end
+    end
+
+    test "change_location/1 returns a location changeset" do
+      location = location_fixture()
+      assert %Ecto.Changeset{} = Admin.change_location(location)
+    end
+  end
 end

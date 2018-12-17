@@ -24,6 +24,7 @@ defmodule BooklistWeb.Router do
     resources "/libraries", LibraryController
     resources "/lists", ListController
     resources "/loans", LoanController
+    resources "/locations", LocationController
   end
 
   # Other scopes may use custom stacks.

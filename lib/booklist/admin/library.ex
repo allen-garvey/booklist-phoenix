@@ -8,6 +8,8 @@ defmodule Booklist.Admin.Library do
     field :super_search_key, :string
     field :url, :string
 
+    has_many :locations, Booklist.Admin.Location
+
     timestamps()
   end
 
