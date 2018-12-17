@@ -23,7 +23,6 @@ defmodule BooklistWeb.Router do
     resources "/book-locations", BookLocationController
     resources "/genres", GenreController
     resources "/libraries", LibraryController
-    resources "/lists", ListController
     resources "/loans", LoanController
     resources "/locations", LocationController
   end
