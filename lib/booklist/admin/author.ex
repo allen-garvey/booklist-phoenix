@@ -8,6 +8,8 @@ defmodule Booklist.Admin.Author do
     field :last_name, :string
     field :middle_name, :string
 
+    has_many :books, Booklist.Admin.Book
+
     timestamps()
   end
 

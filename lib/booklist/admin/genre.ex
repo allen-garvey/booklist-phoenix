@@ -6,6 +6,8 @@ defmodule Booklist.Admin.Genre do
   schema "genres" do
     field :name, :string
 
+    has_many :books, Booklist.Admin.Book
+
     timestamps()
   end
 
