@@ -21,7 +21,9 @@
           </ul>
         </div>
       </nav>
-      <%= render @view_module, @view_template, assigns %>
+      <div class="container">
+        <%= render @view_module, @view_template, assigns %>
+      </div>
     </div>
     <div class="footer">
       <ul class="footer_links container">
