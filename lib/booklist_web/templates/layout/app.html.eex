@@ -11,7 +11,7 @@
     <div class="total">
       <nav class='nav'>
         <div class="container nav_container">
-          <a href="" class="brand nav_heading">Booklist</a>
+          <%= link "Booklist", to: BooklistWeb.Router.Helpers.page_path(@conn, :index), class: "brand nav_heading" %>
           <ul class='nav_links clearfix'>
             <li><a href="">Books</a></li>
             <li><a href="">Bookshelf</a></li>
