@@ -27,7 +27,7 @@
     </div>
     <div class="footer">
       <ul class="footer_links container">
-        <li><a href="">All Fields</a></li>
+        <li><%= link "All Resources", to: BooklistWeb.Router.Helpers.page_path(@conn, :resources) %></li>
         <li><a href="">Add Author</a></li>
         <li><a href="">Library Items</a></li>
         <li><a href="">Inactive books</a></li>

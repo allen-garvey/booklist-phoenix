@@ -17,6 +17,7 @@ defmodule BooklistWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/resources", PageController, :resources
 
     resources "/authors", AuthorController
     resources "/books", BookController
