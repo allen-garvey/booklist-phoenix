@@ -13,11 +13,11 @@
         <div class="container nav_container">
           <%= link "Booklist", to: BooklistWeb.Router.Helpers.page_path(@conn, :index), class: "brand nav_heading" %>
           <ul class='nav_links clearfix'>
-            <li><a href="">Books</a></li>
+            <li><%= link "Books", to: BooklistWeb.Router.Helpers.book_path(@conn, :index) %></li>
             <li><a href="">Bookshelf</a></li>
-            <li><a href="">Libraries</a></li>
-            <li><a href="">Lists</a></li>
-            <li><a href="" class="btn btn-success">Add Book</a></li>
+            <li><%= link "Libraries", to: BooklistWeb.Router.Helpers.library_path(@conn, :index) %></li>
+            <li><%= link "Loans", to: BooklistWeb.Router.Helpers.loan_path(@conn, :index) %></li>
+            <li><%= link "Add Book", to: BooklistWeb.Router.Helpers.book_path(@conn, :new), class: "btn btn-success" %></li>
           </ul>
         </div>
       </nav>
@@ -30,7 +30,6 @@
         <li><%= link "Resources", to: BooklistWeb.Router.Helpers.page_path(@conn, :resources) %></li>
         <li><%= link "Add Author", to: BooklistWeb.Router.Helpers.author_path(@conn, :new) %></li>
         <li><%= link "Authors", to: BooklistWeb.Router.Helpers.author_path(@conn, :index) %></li>
-        <li><%= link "Loans", to: BooklistWeb.Router.Helpers.loan_path(@conn, :index) %></li>
         <li><a href="">Inactive books</a></li>
         <li><a href="">Reporting</a></li>
       </ul>
