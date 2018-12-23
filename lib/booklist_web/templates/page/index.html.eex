@@ -6,20 +6,20 @@
 </header>
 <div class="home_section_container">
   <div class="home_section">
-    <h2 class="home_section_heading"><a href="">Books</a></h2>
+    <h2 class="home_section_heading"><%= link "Books", to: BooklistWeb.Router.Helpers.book_path(@conn, :index) %></h2>
     <p class="description">All your books</p>
-    <a href="" class="btn btn-success">Add Book</a>
+    <%= link "Add Book", to: BooklistWeb.Router.Helpers.book_path(@conn, :new), class: "btn btn-success" %>
   </div>
   <div class="home_section">
     <h2 class="home_section_heading"><a href="">Bookshelf</a></h2>
-    <p class="description">What's on your bookshelf now</p>
+    <p class="description">What’s on your bookshelf now</p>
   </div>
   <div class="home_section">
-    <h2 class="home_section_heading"><a href="">Lists</a></h2>
-    <p class="description">Lists of books to read</p>
+    <h2 class="home_section_heading"><%= link "Loans", to: BooklistWeb.Router.Helpers.loan_path(@conn, :index) %></h2>
+    <p class="description">Books you’ve checked out</p>
   </div>
   <div class="home_section">
-    <h2 class="home_section_heading"><a href="">Libraries</a></h2>
+    <h2 class="home_section_heading"><%= link "Libraries", to: BooklistWeb.Router.Helpers.library_path(@conn, :index) %></h2>
     <p class="description">Where all your books are</p>
   </div>
 </div>
