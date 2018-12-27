@@ -1,0 +1,12 @@
+<h1><%= naive_pluralize(@item_name) %></h1>
+
+<%= link "Add " <> @item_name, to: apply(Routes, @item_path, [@conn, :new]), class: "btn btn-success btn-sm" %>
+
+
+<% item_to_s = assigns[:item_to_s] || &default_item_to_s/1 %>
+
+<ul class="index_list">
+	<%= for item <- @items do %>
+		<li><%= link item_to_s.(item), to: apply(Routes, @item_path, [@conn, :show, item]) %></li>
+	<% end %>
+</ul>
