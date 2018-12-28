@@ -1,26 +1,7 @@
-<h1>Listing Book locations</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Call number</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for book_location <- @book_locations do %>
-    <tr>
-      <td><%= book_location.call_number %></td>
-
-      <td>
-        <%= link "Show", to: Routes.book_location_path(@conn, :show, book_location) %>
-        <%= link "Edit", to: Routes.book_location_path(@conn, :edit, book_location) %>
-        <%= link "Delete", to: Routes.book_location_path(@conn, :delete, book_location), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Book location", to: Routes.book_location_path(@conn, :new) %></span>
+<%= render BooklistWeb.SharedView, "index.html", 
+  conn: @conn, 
+  item_name: "Book Location", 
+  items: @book_locations, 
+  item_path: :book_location_path, 
+  item_to_s: &to_s/1 
+%>
