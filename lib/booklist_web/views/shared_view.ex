@@ -12,10 +12,4 @@ defmodule BooklistWeb.SharedView do
 		end
 	end
 
-	@doc """
-  	Used when no to_s function for item is passed
-  	"""
-	def default_item_to_s(item) do
-		item.name
-	end
 end
