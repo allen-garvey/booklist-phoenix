@@ -12,4 +12,16 @@ defmodule BooklistWeb.SharedView do
 		end
 	end
 
+	@doc """
+  	Takes date or datetime and
+  	returns string date in format MM-DD-YYYY
+  	"""
+	def us_formatted_date(datetime) do
+		String.pad_leading(Integer.to_string(datetime.month), 2, "0") <> 
+		"/" <>
+		String.pad_leading(Integer.to_string(datetime.day), 2, "0") <> 
+		"/" <>
+		Integer.to_string(datetime.year)
+	end
+
 end
