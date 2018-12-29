@@ -18,7 +18,7 @@ defmodule Booklist.Admin do
 
   """
   def list_genres do
-    Repo.all(Genre)
+    Repo.all(from(Genre, order_by: [:name]))
   end
 
   @doc """
@@ -114,7 +114,7 @@ defmodule Booklist.Admin do
 
   """
   def list_authors do
-    Repo.all(Author)
+    Repo.all(from(Author, order_by: [:last_name, :first_name, :middle_name]))
   end
 
   @doc """
@@ -210,7 +210,7 @@ defmodule Booklist.Admin do
 
   """
   def list_books do
-    Repo.all(Book)
+    Repo.all(from(Book, order_by: [:title, :id]))
   end
 
   @doc """
@@ -306,7 +306,7 @@ defmodule Booklist.Admin do
 
   """
   def list_libraries do
-    Repo.all(Library)
+    Repo.all(from(Library, order_by: [:name]))
   end
 
   @doc """
@@ -402,7 +402,9 @@ defmodule Booklist.Admin do
 
   """
   def list_loans do
-    Repo.all(Loan)
+    from(l in Loan, join: library in assoc(l, :library), order_by: [:due_date, library.name])
+      |> Repo.all
+
   end
 
   @doc """
@@ -498,7 +500,8 @@ defmodule Booklist.Admin do
 
   """
   def list_locations do
-    Repo.all(Location)
+    from(l in Location, join: library in assoc(l, :library), order_by: [library.name, :name])
+      |> Repo.all
   end
 
   @doc """
@@ -594,7 +597,8 @@ defmodule Booklist.Admin do
 
   """
   def list_book_locations do
-    Repo.all(BookLocation)
+    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), order_by: [book.title, location.name])
+      |> Repo.all
   end
 
   @doc """
@@ -690,7 +694,8 @@ defmodule Booklist.Admin do
 
   """
   def list_ratings do
-    Repo.all(Rating)
+    from(r in Rating, join: book in assoc(r, :book), order_by: [book.title, :date_scored])
+      |> Repo.all
   end
 
   @doc """
