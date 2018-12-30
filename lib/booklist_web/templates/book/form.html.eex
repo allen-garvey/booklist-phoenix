@@ -9,17 +9,22 @@
   <%= textarea f, :title %>
   <%= error_tag f, :title %>
 
-  <%= label f, :sort_title %>
-  <%= textarea f, :sort_title %>
-  <%= error_tag f, :sort_title %>
-
   <%= label f, :subtitle %>
   <%= textarea f, :subtitle %>
   <%= error_tag f, :subtitle %>
 
+  <%= label f, :author_id %>
+  <%= select f, :author_id, @authors %>
+  <%= error_tag f, :author_id %>
+
   <%= label f, :is_fiction %>
   <%= checkbox f, :is_fiction %>
   <%= error_tag f, :is_fiction %>
+
+  <%= label f, :genre_id %>
+  <%= select f, :genre_id, @genres %>
+  <%= error_tag f, :genre_id %>
+
 
   <div>
     <%= submit "Save" %>
