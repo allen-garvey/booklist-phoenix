@@ -8,4 +8,11 @@ defmodule BooklistWeb.LocationView do
   def to_s(location) do
   	location.name
   end
+
+  @doc """
+  Maps a list of locations into tuples, used for forms
+  """
+  def map_for_form(locations) do
+    Enum.map(locations, &{to_s(&1), &1.id})
+  end
 end
