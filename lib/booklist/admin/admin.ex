@@ -402,7 +402,7 @@ defmodule Booklist.Admin do
 
   """
   def list_loans do
-    from(l in Loan, join: library in assoc(l, :library), order_by: [:due_date, library.name])
+    from(l in Loan, join: library in assoc(l, :library), preload: [library: library], order_by: [:due_date, library.name])
       |> Repo.all
 
   end
@@ -500,7 +500,7 @@ defmodule Booklist.Admin do
 
   """
   def list_locations do
-    from(l in Location, join: library in assoc(l, :library), order_by: [library.name, :name])
+    from(l in Location, join: library in assoc(l, :library), preload: [library: library], order_by: [library.name, :name])
       |> Repo.all
   end
 
@@ -597,7 +597,7 @@ defmodule Booklist.Admin do
 
   """
   def list_book_locations do
-    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), order_by: [book.title, location.name])
+    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), preload: [location: location, book: book],  order_by: [book.title, location.name])
       |> Repo.all
   end
 
@@ -694,7 +694,7 @@ defmodule Booklist.Admin do
 
   """
   def list_ratings do
-    from(r in Rating, join: book in assoc(r, :book), order_by: [book.title, :date_scored])
+    from(r in Rating, join: book in assoc(r, :book), preload: [book: book], order_by: [book.title, :date_scored])
       |> Repo.all
   end
 
