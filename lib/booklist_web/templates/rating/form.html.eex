@@ -5,8 +5,12 @@
     </div>
   <% end %>
 
+  <%= label f, :book_id %>
+  <%= select f, :book_id, @books %>
+  <%= error_tag f, :book_id %>
+
   <%= label f, :date_scored %>
-  <%= date_select f, :date_scored %>
+  <%= date_input f, :date_scored %>
   <%= error_tag f, :date_scored %>
 
   <%= label f, :score %>
