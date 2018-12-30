@@ -17,9 +17,12 @@
   <%= select f, :author_id, @authors %>
   <%= error_tag f, :author_id %>
 
-  <%= label f, :is_fiction %>
-  <%= checkbox f, :is_fiction %>
+  <%= label f, :is_fiction_true, "Fiction" %>
+  <%= radio_button f, :is_fiction, "true" %>
+  <%= label f, :is_fiction_false, "Non-fiction" %>
+  <%= radio_button f, :is_fiction, "false" %>
   <%= error_tag f, :is_fiction %>
+
 
   <%= label f, :genre_id %>
   <%= select f, :genre_id, @genres %>
