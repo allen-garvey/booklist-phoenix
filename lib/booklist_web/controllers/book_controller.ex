@@ -4,6 +4,14 @@ defmodule BooklistWeb.BookController do
   alias Booklist.Admin
   alias Booklist.Admin.Book
 
+  def related_fields() do
+    [
+      #add empty item at start of authors since it is optional
+      authors: Admin.list_authors() |> BooklistWeb.AuthorView.map_for_form |> List.insert_at(0, {"", nil}),
+      genres: Admin.list_genres() |> BooklistWeb.GenreView.map_for_form,
+    ]
+  end
+
   def index(conn, _params) do
     books = Admin.list_books()
     render(conn, "index.html", books: books)
@@ -11,7 +19,7 @@ defmodule BooklistWeb.BookController do
 
   def new(conn, _params) do
     changeset = Admin.change_book(%Book{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", [changeset: changeset] ++ related_fields())
   end
 
   def create(conn, %{"book" => book_params}) do
@@ -22,7 +30,7 @@ defmodule BooklistWeb.BookController do
         |> redirect(to: Routes.book_path(conn, :show, book))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", [changeset: changeset] ++ related_fields())
     end
   end
 
@@ -34,7 +42,7 @@ defmodule BooklistWeb.BookController do
   def edit(conn, %{"id" => id}) do
     book = Admin.get_book!(id)
     changeset = Admin.change_book(book)
-    render(conn, "edit.html", book: book, changeset: changeset)
+    render(conn, "edit.html", [book: book, changeset: changeset] ++ related_fields())
   end
 
   def update(conn, %{"id" => id, "book" => book_params}) do
@@ -47,7 +55,7 @@ defmodule BooklistWeb.BookController do
         |> redirect(to: Routes.book_path(conn, :show, book))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", book: book, changeset: changeset)
+        render(conn, "edit.html", [book: book, changeset: changeset] ++ related_fields())
     end
   end
 
