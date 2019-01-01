@@ -5,7 +5,7 @@ defmodule Booklist.Admin.Loan do
 
   schema "loans" do
     field :due_date, :date
-    field :item_count, :integer
+    field :item_count, :integer, default: 1
     
     belongs_to :library, Booklist.Admin.Library
 
