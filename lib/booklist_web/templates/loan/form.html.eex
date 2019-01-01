@@ -5,6 +5,10 @@
     </div>
   <% end %>
 
+  <%= label f, :library_id %>
+  <%= select f, :library_id, @libraries %>
+  <%= error_tag f, :library_id %>
+
   <%= label f, :due_date %>
   <%= date_select f, :due_date %>
   <%= error_tag f, :due_date %>
