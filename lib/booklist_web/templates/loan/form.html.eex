@@ -10,7 +10,7 @@
   <%= error_tag f, :library_id %>
 
   <%= label f, :due_date %>
-  <%= date_select f, :due_date %>
+  <%= date_input f, :due_date %>
   <%= error_tag f, :due_date %>
 
   <%= label f, :item_count %>
