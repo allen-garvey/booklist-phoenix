@@ -9,6 +9,10 @@
   <%= textarea f, :name %>
   <%= error_tag f, :name %>
 
+  <%= label f, :library_id %>
+  <%= select f, :library_id, @libraries %>
+  <%= error_tag f, :library_id %>
+
   <div>
     <%= submit "Save" %>
   </div>
