@@ -28,8 +28,8 @@
     <div class="footer">
       <ul class="footer_links container">
         <li><%= link "Resources", to: BooklistWeb.Router.Helpers.page_path(@conn, :resources) %></li>
-        <li><%= link "Authors", to: BooklistWeb.Router.Helpers.author_path(@conn, :index) %></li>
         <li><%= link "Add Author", to: BooklistWeb.Router.Helpers.author_path(@conn, :new) %></li>
+        <li><%= link "Authors", to: BooklistWeb.Router.Helpers.author_path(@conn, :index) %></li>
         <li><a href="">Inactive books</a></li>
         <li><a href="">Reporting</a></li>
       </ul>
