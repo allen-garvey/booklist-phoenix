@@ -14,7 +14,7 @@
   <%= error_tag f, :location_id %>
 
   <%= label f, :call_number %>
-  <%= textarea f, :call_number %>
+  <%= text_input f, :call_number %>
   <%= error_tag f, :call_number %>
 
   <div>

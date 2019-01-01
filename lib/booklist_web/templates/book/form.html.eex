@@ -6,11 +6,11 @@
   <% end %>
 
   <%= label f, :title %>
-  <%= textarea f, :title %>
+  <%= text_input f, :title %>
   <%= error_tag f, :title %>
 
   <%= label f, :subtitle %>
-  <%= textarea f, :subtitle %>
+  <%= text_input f, :subtitle %>
   <%= error_tag f, :subtitle %>
 
   <%= label f, :author_id %>
