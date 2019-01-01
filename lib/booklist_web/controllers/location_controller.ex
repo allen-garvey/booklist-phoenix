@@ -4,6 +4,12 @@ defmodule BooklistWeb.LocationController do
   alias Booklist.Admin
   alias Booklist.Admin.Location
 
+  def related_fields() do
+    [
+      libraries: Admin.list_libraries() |> BooklistWeb.LibraryView.map_for_form,
+    ]
+  end
+
   def index(conn, _params) do
     locations = Admin.list_locations()
     render(conn, "index.html", locations: locations)
@@ -11,7 +17,7 @@ defmodule BooklistWeb.LocationController do
 
   def new(conn, _params) do
     changeset = Admin.change_location(%Location{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", [changeset: changeset] ++ related_fields())
   end
 
   def create(conn, %{"location" => location_params}) do
@@ -22,7 +28,7 @@ defmodule BooklistWeb.LocationController do
         |> redirect(to: Routes.location_path(conn, :show, location))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", [changeset: changeset] ++ related_fields())
     end
   end
 
@@ -34,7 +40,7 @@ defmodule BooklistWeb.LocationController do
   def edit(conn, %{"id" => id}) do
     location = Admin.get_location!(id)
     changeset = Admin.change_location(location)
-    render(conn, "edit.html", location: location, changeset: changeset)
+    render(conn, "edit.html", [location: location, changeset: changeset] ++ related_fields())
   end
 
   def update(conn, %{"id" => id, "location" => location_params}) do
@@ -47,7 +53,7 @@ defmodule BooklistWeb.LocationController do
         |> redirect(to: Routes.location_path(conn, :show, location))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", location: location, changeset: changeset)
+        render(conn, "edit.html", [location: location, changeset: changeset] ++ related_fields())
     end
   end
 
