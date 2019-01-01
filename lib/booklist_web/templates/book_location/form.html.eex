@@ -5,6 +5,14 @@
     </div>
   <% end %>
 
+  <%= label f, :book_id %>
+  <%= select f, :book_id, @books %>
+  <%= error_tag f, :book_id %>
+
+  <%= label f, :location_id %>
+  <%= select f, :location_id, @locations %>
+  <%= error_tag f, :location_id %>
+
   <%= label f, :call_number %>
   <%= textarea f, :call_number %>
   <%= error_tag f, :call_number %>
