@@ -5,17 +5,11 @@
     </div>
   <% end %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <%= BooklistWeb.SharedView.form_group :title, f, &text_input/3 %>
 
-  <%= label f, :subtitle %>
-  <%= text_input f, :subtitle %>
-  <%= error_tag f, :subtitle %>
+  <%= BooklistWeb.SharedView.form_group :subtitle, f, &text_input/3 %>
 
-  <%= label f, :author_id %>
-  <%= select f, :author_id, @authors %>
-  <%= error_tag f, :author_id %>
+  <%= BooklistWeb.SharedView.form_group :author_id, f, @authors, &select/4 %>
 
   <%= label f, :is_fiction_true, "Fiction" %>
   <%= radio_button f, :is_fiction, "true" %>
@@ -23,11 +17,7 @@
   <%= radio_button f, :is_fiction, "false" %>
   <%= error_tag f, :is_fiction %>
 
-
-  <%= label f, :genre_id %>
-  <%= select f, :genre_id, @genres %>
-  <%= error_tag f, :genre_id %>
-
+  <%= BooklistWeb.SharedView.form_group :genre_id, f, @genres, &select/4 %>
 
   <%= BooklistWeb.SharedView.submit_button "Book" %>
 <% end %>
