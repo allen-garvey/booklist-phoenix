@@ -5,9 +5,7 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
+  <%= BooklistWeb.SharedView.form_group :name, f, &text_input/3 %>
 
   <%= BooklistWeb.SharedView.submit_button "Genre" %>
 <% end %>
