@@ -5,17 +5,11 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
+  <%= BooklistWeb.SharedView.form_group :name, f, &text_input/3 %>
 
-  <%= label f, :url %>
-  <%= text_input f, :url %>
-  <%= error_tag f, :url %>
+  <%= BooklistWeb.SharedView.form_group :url, f, &text_input/3 %>
 
-  <%= label f, :super_search_key %>
-  <%= text_input f, :super_search_key %>
-  <%= error_tag f, :super_search_key %>
+  <%= BooklistWeb.SharedView.form_group :super_search_key, f, &text_input/3 %>
 
   <%= BooklistWeb.SharedView.submit_button "Library" %>
 <% end %>
