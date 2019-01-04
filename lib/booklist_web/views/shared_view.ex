@@ -38,4 +38,8 @@ defmodule BooklistWeb.SharedView do
 		content_tag(:div, [label(form, field), fun.(form, field, items, class: "form-control"), error_tag(form, field)], class: "form-group")
 	end
 
+	def submit_button(resource_title) do
+		content_tag(:div, submit("Save " <> resource_title, class: "btn btn-success"))
+	end
+
 end
