@@ -13,7 +13,5 @@
   <%= select f, :library_id, @libraries %>
   <%= error_tag f, :library_id %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Location" %>
 <% end %>

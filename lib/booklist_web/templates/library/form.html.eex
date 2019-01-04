@@ -17,7 +17,5 @@
   <%= text_input f, :super_search_key %>
   <%= error_tag f, :super_search_key %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Library" %>
 <% end %>

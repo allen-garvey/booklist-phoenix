@@ -9,7 +9,5 @@
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Genre" %>
 <% end %>

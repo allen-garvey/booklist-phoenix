@@ -17,7 +17,5 @@
   <%= text_input f, :call_number %>
   <%= error_tag f, :call_number %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Book Location" %>
 <% end %>

@@ -17,7 +17,5 @@
   <%= text_input f, :last_name %>
   <%= error_tag f, :last_name %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Author" %>
 <% end %>

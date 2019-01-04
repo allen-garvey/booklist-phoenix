@@ -17,7 +17,5 @@
   <%= number_input f, :item_count %>
   <%= error_tag f, :item_count %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Loan" %>
 <% end %>
