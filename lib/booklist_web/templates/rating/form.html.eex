@@ -11,7 +11,5 @@
 
   <%= BooklistWeb.SharedView.form_group :score, f, &number_input/3 %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= BooklistWeb.SharedView.submit_button "Rating" %>
 <% end %>
