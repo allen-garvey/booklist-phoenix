@@ -4,18 +4,12 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
+  
+  <%= BooklistWeb.SharedView.form_group :first_name, f, &text_input/3 %>
 
-  <%= label f, :first_name %>
-  <%= text_input f, :first_name %>
-  <%= error_tag f, :first_name %>
+  <%= BooklistWeb.SharedView.form_group :middle_name, f, &text_input/3 %>
 
-  <%= label f, :middle_name %>
-  <%= text_input f, :middle_name %>
-  <%= error_tag f, :middle_name %>
-
-  <%= label f, :last_name %>
-  <%= text_input f, :last_name %>
-  <%= error_tag f, :last_name %>
+  <%= BooklistWeb.SharedView.form_group :last_name, f, &text_input/3 %>
 
   <%= BooklistWeb.SharedView.submit_button "Author" %>
 <% end %>
