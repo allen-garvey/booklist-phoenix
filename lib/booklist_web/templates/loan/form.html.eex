@@ -5,17 +5,11 @@
     </div>
   <% end %>
 
-  <%= label f, :library_id %>
-  <%= select f, :library_id, @libraries %>
-  <%= error_tag f, :library_id %>
+  <%= BooklistWeb.SharedView.form_group :library_id, f, @libraries, &select/4 %>
 
-  <%= label f, :due_date %>
-  <%= date_input f, :due_date %>
-  <%= error_tag f, :due_date %>
-
-  <%= label f, :item_count %>
-  <%= number_input f, :item_count %>
-  <%= error_tag f, :item_count %>
+  <%= BooklistWeb.SharedView.form_group :due_date, f, &date_input/3 %>
+  
+  <%= BooklistWeb.SharedView.form_group :item_count, f, &number_input/3 %>
 
   <%= BooklistWeb.SharedView.submit_button "Loan" %>
 <% end %>
