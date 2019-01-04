@@ -5,17 +5,11 @@
     </div>
   <% end %>
 
-  <%= label f, :book_id %>
-  <%= select f, :book_id, @books %>
-  <%= error_tag f, :book_id %>
+  <%= BooklistWeb.SharedView.form_group :book_id, f, @books, &select/4 %>
 
-  <%= label f, :location_id %>
-  <%= select f, :location_id, @locations %>
-  <%= error_tag f, :location_id %>
+  <%= BooklistWeb.SharedView.form_group :location_id, f, @locations, &select/4 %>
 
-  <%= label f, :call_number %>
-  <%= text_input f, :call_number %>
-  <%= error_tag f, :call_number %>
+  <%= BooklistWeb.SharedView.form_group :call_number, f, &text_input/3 %>
 
   <%= BooklistWeb.SharedView.submit_button "Book Location" %>
 <% end %>
