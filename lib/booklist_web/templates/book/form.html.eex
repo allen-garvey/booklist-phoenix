@@ -10,12 +10,14 @@
   <%= BooklistWeb.SharedView.form_group :subtitle, f, &text_input/3 %>
 
   <%= BooklistWeb.SharedView.form_group :author_id, f, @authors, &select/4 %>
-
-  <%= label f, :is_fiction_true, "Fiction" %>
-  <%= radio_button f, :is_fiction, "true" %>
-  <%= label f, :is_fiction_false, "Non-fiction" %>
-  <%= radio_button f, :is_fiction, "false" %>
-  <%= error_tag f, :is_fiction %>
+  
+  <div class="form-group">
+    <%= label f, :is_fiction_true, "Fiction" %>
+    <%= radio_button f, :is_fiction, "true" %>
+    <%= label f, :is_fiction_false, "Non-fiction" %>
+    <%= radio_button f, :is_fiction, "false" %>
+    <%= error_tag f, :is_fiction %>
+  </div>
 
   <%= BooklistWeb.SharedView.form_group :genre_id, f, @genres, &select/4 %>
 
