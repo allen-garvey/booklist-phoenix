@@ -2,7 +2,9 @@ defmodule BooklistWeb.PageController do
   use BooklistWeb, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    loans_due_soon = Booklist.Admin.list_loans_due_soon()
+    
+    render(conn, "index.html", loans_due_soon: loans_due_soon)
   end
 
   def resources(conn, _params) do

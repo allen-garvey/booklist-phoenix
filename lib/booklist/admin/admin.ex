@@ -408,6 +408,17 @@ defmodule Booklist.Admin do
   end
 
   @doc """
+  Returns a list of loans that are due soon.
+
+  """
+  def list_loans_due_soon do
+    soon_date = Date.utc_today |> Date.add(7)
+    
+    from(l in Loan, join: library in assoc(l, :library), preload: [library: library], where: l.due_date < ^soon_date, order_by: [:due_date, library.name])
+      |> Repo.all
+  end
+
+  @doc """
   Gets a single loan.
 
   Raises `Ecto.NoResultsError` if the Loan does not exist.
