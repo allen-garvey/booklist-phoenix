@@ -12,6 +12,10 @@ defmodule BooklistWeb.BookController do
     ]
   end
 
+  def index(conn, %{"active" => is_active}) do
+    books = Admin.list_books_active(is_active == "true")
+    render(conn, "index.html", books: books)
+  end
   def index(conn, _params) do
     books = Admin.list_books()
     render(conn, "index.html", books: books)

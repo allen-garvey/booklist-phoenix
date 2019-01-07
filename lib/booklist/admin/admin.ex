@@ -214,6 +214,12 @@ defmodule Booklist.Admin do
   end
 
   @doc """
+  Returns the list of books by whether or not they are active
+  """
+  def list_books_active(is_active) when is_boolean(is_active) do
+    Repo.all(from(b in Book, where: b.is_active == ^is_active, order_by: [:title, :id]))
+  end
+  @doc """
   Gets a single book.
 
   Raises `Ecto.NoResultsError` if the Book does not exist.
