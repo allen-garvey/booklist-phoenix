@@ -6,6 +6,7 @@ defmodule Booklist.Admin do
   import Ecto.Query, warn: false
   alias Booklist.Repo
 
+  alias Booklist.Admin.Rating
   alias Booklist.Admin.Genre
 
   @doc """
@@ -219,6 +220,28 @@ defmodule Booklist.Admin do
   def list_books_active(is_active) when is_boolean(is_active) do
     Repo.all(from(b in Book, where: b.is_active == ^is_active, order_by: [:title, :id]))
   end
+
+  @doc """
+  Returns the list of books by whether or not they have been read (i.e. have ratings)
+  """
+  def list_books_read(true) do
+    #using inner join since no where in support
+    Repo.all(from(b in Book, join: r in Rating, on: b.id == r.book_id, distinct: b.id, order_by: [:title, :id]))
+  end
+
+  def list_books_read(false) do
+    from(b in Book, where: not(b.id in ^rated_book_ids()), order_by: [:title, :id])
+      |> Repo.all
+  end
+
+  @doc """
+  Returns the list of book ids that have ratings
+  """
+  def rated_book_ids do
+    from(r in Rating, distinct: r.book_id, select: r.book_id)
+      |> Repo.all
+  end
+
   @doc """
   Gets a single book.
 
@@ -698,8 +721,6 @@ defmodule Booklist.Admin do
   def change_book_location(%BookLocation{} = book_location) do
     BookLocation.changeset(book_location, %{})
   end
-
-  alias Booklist.Admin.Rating
 
   @doc """
   Returns the list of ratings.
