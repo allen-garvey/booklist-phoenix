@@ -16,7 +16,7 @@
 </header>
 <div class="home_section_container">
   <div class="home_section">
-    <h2 class="home_section_heading"><%= link "Books", to: BooklistWeb.Router.Helpers.book_path(@conn, :index) %></h2>
+    <h2 class="home_section_heading"><%= link "Books", to: BooklistWeb.BookView.active_book_path(@conn) %></h2>
     <p class="description">All your books</p>
     <%= link "Add Book", to: BooklistWeb.Router.Helpers.book_path(@conn, :new), class: "btn btn-success" %>
   </div>
