@@ -12,6 +12,11 @@ defmodule BooklistWeb.BookController do
     ]
   end
 
+  def index(conn, %{"active" => is_active, "read" => is_read}) do
+    books = Admin.list_books_by_active_and_read(is_active == "true", is_read == "true")
+    render(conn, "index.html", books: books)
+  end
+
   def index(conn, %{"active" => is_active}) do
     books = Admin.list_books_active(is_active == "true")
     render(conn, "index.html", books: books)

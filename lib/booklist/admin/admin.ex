@@ -224,14 +224,21 @@ defmodule Booklist.Admin do
   @doc """
   Returns the list of books by whether or not they have been read (i.e. have ratings)
   """
-  def list_books_read(true) do
-    #using inner join since no where in support
-    Repo.all(from(b in Book, join: r in Rating, on: b.id == r.book_id, distinct: b.id, order_by: [:title, :id]))
+  def list_books_read(is_read) when is_boolean(is_read) do
+    list_books_read_query(is_read)
+      |> Repo.all
   end
 
-  def list_books_read(false) do
+  @doc """
+  Returns a query for the list of books by whether or not they have been read (i.e. have ratings)
+  """
+  def list_books_read_query(true) do
+    #using inner join since no where in support
+    from(b in Book, join: r in Rating, on: b.id == r.book_id, distinct: b.id, order_by: [:title, :id])
+  end
+
+  def list_books_read_query(false) do
     from(b in Book, where: not(b.id in ^rated_book_ids()), order_by: [:title, :id])
-      |> Repo.all
   end
 
   @doc """
@@ -239,6 +246,15 @@ defmodule Booklist.Admin do
   """
   def rated_book_ids do
     from(r in Rating, distinct: r.book_id, select: r.book_id)
+      |> Repo.all
+  end
+
+  @doc """
+  Returns the list of books by whether or not they are active, and whether or not they have been read (i.e. have ratings)
+  """
+  def list_books_by_active_and_read(is_active, is_read) when is_boolean(is_active) and is_boolean(is_read) do
+    list_books_read_query(is_read) 
+      |> where([b], b.is_active == ^is_active) 
       |> Repo.all
   end
 
