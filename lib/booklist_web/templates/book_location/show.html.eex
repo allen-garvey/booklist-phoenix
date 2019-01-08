@@ -8,9 +8,19 @@
 
 <ul>
 
-  <li>
-    <strong>Call number:</strong>
-    <%= @book_location.call_number %>
-  </li>
+	<li>
+		<strong>Book:</strong>
+		<%= link BooklistWeb.BookView.to_s(@book_location.book), to: Routes.book_path(@conn, :show, @book_location.book) %>
+	</li>
+
+	<li>
+		<strong>Location:</strong>
+		<%= link BooklistWeb.LocationView.to_s(@book_location.location), to: Routes.location_path(@conn, :show, @book_location.location) %>
+	</li>
+
+	<li>
+	<strong>Call number:</strong>
+	<%= @book_location.call_number %>
+	</li>
 
 </ul>
