@@ -775,7 +775,10 @@ defmodule Booklist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_rating!(id), do: Repo.get!(Rating, id)
+  def get_rating!(id) do
+    from(r in Rating, join: book in assoc(r, :book), preload: [book: book], where: r.id == ^id, order_by: [book.title, :date_scored], limit: 1)
+      |> Repo.one!
+  end
 
   @doc """
   Creates a rating.
