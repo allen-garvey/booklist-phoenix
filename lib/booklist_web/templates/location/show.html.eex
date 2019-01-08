@@ -8,9 +8,14 @@
 
 <ul>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @location.name %>
-  </li>
+	<li>
+		<strong>Name:</strong>
+		<%= @location.name %>
+	</li>
+
+	<li>
+		<strong>Library:</strong>
+		<%= link BooklistWeb.LibraryView.to_s(@location.library), to: Routes.library_path(@conn, :show, @location.library) %>
+	</li>
 
 </ul>
