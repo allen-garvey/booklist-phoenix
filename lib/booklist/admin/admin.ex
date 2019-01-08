@@ -577,7 +577,10 @@ defmodule Booklist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_location!(id), do: Repo.get!(Location, id)
+  def get_location!(id) do 
+    from(l in Location, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, order_by: [library.name, :name], limit: 1)
+      |> Repo.one!
+  end
 
   @doc """
   Creates a location.
