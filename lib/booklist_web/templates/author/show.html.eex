@@ -1,4 +1,11 @@
-<h1>Show Author</h1>
+<%= render(BooklistWeb.SharedView, "show-header.html", 
+      conn: @conn, 
+      resource_title_plural: "Authors", 
+      resource_path_atom: :author_path, 
+      item: @author, 
+      item_name: to_s(@author)) 
+%>
+
 
 <ul>
 
@@ -19,5 +26,3 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.author_path(@conn, :edit, @author) %></span>
-<span><%= link "Back", to: Routes.author_path(@conn, :index) %></span>

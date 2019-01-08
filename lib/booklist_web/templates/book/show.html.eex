@@ -1,4 +1,10 @@
-<h1>Show Book</h1>
+<%= render(BooklistWeb.SharedView, "show-header.html", 
+      conn: @conn, 
+      resource_title_plural: "Books", 
+      resource_path_atom: :book_path, 
+      item: @book, 
+      item_name: to_s(@book)) 
+%>
 
 <ul>
 
@@ -23,6 +29,3 @@
   </li>
 
 </ul>
-
-<span><%= link "Edit", to: Routes.book_path(@conn, :edit, @book) %></span>
-<span><%= link "Back", to: Routes.book_path(@conn, :index) %></span>
