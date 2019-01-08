@@ -7,15 +7,20 @@
 %>
 
 <ul>
+	
+	<li>
+		<strong>Book:</strong>
+		<%= link BooklistWeb.BookView.to_s(@rating.book), to: Routes.book_path(@conn, :show, @rating.book) %>
+	</li>
 
-  <li>
-    <strong>Date scored:</strong>
-    <%= @rating.date_scored %>
-  </li>
+	<li>
+		<strong>Date scored:</strong>
+		<%= BooklistWeb.SharedView.us_formatted_date(@rating.date_scored) %>
+	</li>
 
-  <li>
-    <strong>Score:</strong>
-    <%= @rating.score %>
-  </li>
+	<li>
+		<strong>Score:</strong>
+		<%= @rating.score %>
+	</li>
 
 </ul>
