@@ -8,14 +8,19 @@
 
 <ul>
 
-  <li>
-    <strong>Due date:</strong>
-    <%= @loan.due_date %>
-  </li>
+	<li>
+		<strong>Library:</strong>
+		<%= link BooklistWeb.LibraryView.to_s(@loan.library), to: Routes.library_path(@conn, :show, @loan.library) %>
+	</li>
 
-  <li>
-    <strong>Item count:</strong>
-    <%= @loan.item_count %>
-  </li>
+	<li>
+		<strong>Due date:</strong>
+		<%= BooklistWeb.SharedView.us_formatted_date(@loan.due_date) %>
+	</li>
+
+	<li>
+		<strong>Item count:</strong>
+		<%= @loan.item_count %>
+	</li>
 
 </ul>
