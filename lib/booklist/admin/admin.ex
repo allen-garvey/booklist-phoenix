@@ -477,7 +477,10 @@ defmodule Booklist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_loan!(id), do: Repo.get!(Loan, id)
+  def get_loan!(id) do
+    from(l in Loan, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, order_by: [:due_date, library.name], limit: 1)
+      |> Repo.one!
+  end
 
   @doc """
   Creates a loan.
