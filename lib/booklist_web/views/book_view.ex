@@ -16,27 +16,27 @@ defmodule BooklistWeb.BookView do
   Path for active books 
   """
   def active_book_path(conn) do
-    BooklistWeb.Router.Helpers.book_path(conn, :index, active: "true")
+    Routes.book_path(conn, :index, active: "true")
   end
 
   @doc """
   Path for active books that are unread (i.e. have no ratings)
   """
   def active_unread_book_path(conn) do
-    BooklistWeb.Router.Helpers.book_path(conn, :index, active: "true", read: "false")
+    Routes.book_path(conn, :index, active: "true", read: "false")
   end
 
   @doc """
   Path for inactive books that are unread (i.e. have no ratings)
   """
   def inactive_unread_book_path(conn) do
-    BooklistWeb.Router.Helpers.book_path(conn, :index, active: "false", read: "false")
+    Routes.book_path(conn, :index, active: "false", read: "false")
   end
 
   @doc """
   Path for inactive books that have been read (i.e. have ratings)
   """
   def inactive_read_book_path(conn) do
-    BooklistWeb.Router.Helpers.book_path(conn, :index, active: "false", read: "true")
+    Routes.book_path(conn, :index, active: "false", read: "true")
   end
 end
