@@ -24,6 +24,19 @@
   </li>
 
   <li>
+    <strong>Author:</strong>
+    <%= if !is_nil(@book.author) do
+      link BooklistWeb.AuthorView.to_s(@book.author), to: Routes.author_path(@conn, :show, @book.author)
+    end
+    %>
+  </li>
+
+  <li>
+    <strong>Genre:</strong>
+    <%= link BooklistWeb.GenreView.to_s(@book.genre), to: Routes.genre_path(@conn, :show, @book.genre) %>
+  </li>
+
+  <li>
     <strong>Is fiction:</strong>
     <%= @book.is_fiction %>
   </li>
