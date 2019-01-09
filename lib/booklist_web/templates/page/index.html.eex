@@ -21,7 +21,7 @@
     <%= link "Add Book", to: Routes.book_path(@conn, :new), class: "btn btn-success" %>
   </div>
   <div class="home_section">
-    <h2 class="home_section_heading"><a href="">Bookshelf</a></h2>
+    <h2 class="home_section_heading"><%= link "Bookshelf", to: Routes.page_path(@conn, :bookshelf) %></h2>
     <p class="description">What’s on your bookshelf now</p>
   </div>
   <div class="home_section">
