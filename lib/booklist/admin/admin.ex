@@ -8,6 +8,7 @@ defmodule Booklist.Admin do
 
   alias Booklist.Admin.Rating
   alias Booklist.Admin.Genre
+  alias Booklist.Admin.Book
 
   @doc """
   Returns the list of genres.
@@ -132,7 +133,10 @@ defmodule Booklist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_author!(id), do: Repo.get!(Author, id)
+  def get_author!(id) do
+    Repo.get!(Author, id)
+      |> Repo.preload([books: (from b in Book, order_by: [b.sort_title, b.id])])
+  end
 
   @doc """
   Creates a author.
@@ -198,8 +202,6 @@ defmodule Booklist.Admin do
   def change_author(%Author{} = author) do
     Author.changeset(author, %{})
   end
-
-  alias Booklist.Admin.Book
 
   @doc """
   Returns the list of books.
