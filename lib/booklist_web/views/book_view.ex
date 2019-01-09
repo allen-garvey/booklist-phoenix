@@ -2,7 +2,15 @@ defmodule BooklistWeb.BookView do
   use BooklistWeb, :view
 
   def to_s(book) do
-  	book.title
+  	to_s_helper(book.title, book.subtitle)
+  end
+
+  def to_s_helper(title, nil) do
+    title
+  end
+
+  def to_s_helper(title, subtitle) do
+    title <> ": " <> subtitle
   end
 
   @doc """
