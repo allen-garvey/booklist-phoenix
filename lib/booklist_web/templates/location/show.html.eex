@@ -27,7 +27,7 @@
 		<%= for book_location <- @location.book_locations do %>
       		<li>
       			<%= link BooklistWeb.BookView.to_s(book_location.book), to: Routes.book_path(@conn, :show, book_location.book) %>
-      			<%= BooklistWeb.BookLocationView.super_search_direct_link(@location.library, book_location.call_number) %>
+      			<%= BooklistWeb.BookLocationView.super_search_direct_link(@location.library, BooklistWeb.BookLocationView.get_call_number(book_location.call_number, book_location.book)) %>
       			<div class="btn_group">
       				<%= link content_tag(:div, "⚲", class: "search_icon"), to: "https://google.com", class: "btn btn-primary btn-xs btn_search"  %>
       			</div>

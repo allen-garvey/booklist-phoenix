@@ -13,6 +13,21 @@ defmodule BooklistWeb.BookLocationView do
   end
 
   @doc """
+  Attempts to dynamically create call number not set if book is fiction and has an author with a last name
+  """
+  def get_call_number(nil, book) do
+  	if book.is_fiction and !is_nil(book.author) and !is_nil(book.author.last_name) do
+  		book.author.last_name
+  	else
+  		nil
+  	end
+  end
+
+  def get_call_number(call_number, _book) do
+  	call_number
+  end
+
+  @doc """
   Because call_number might be nil
   """
   def to_s_with_call_number(string, nil) do
