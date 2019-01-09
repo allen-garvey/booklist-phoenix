@@ -803,7 +803,7 @@ defmodule Booklist.Admin do
 
   """
   def list_ratings do
-    from(r in Rating, join: book in assoc(r, :book), preload: [book: book], order_by: [book.title, :date_scored])
+    from(r in Rating, join: book in assoc(r, :book), preload: [book: book], order_by: [desc: :date_scored, desc: :id])
       |> Repo.all
   end
 
