@@ -51,7 +51,9 @@ defmodule BooklistWeb.BookController do
 
   def show(conn, %{"id" => id}) do
     book = Admin.get_book!(id)
-    render(conn, "show.html", book: book)
+    changeset_is_active = book |> Admin.change_book |> Admin.change_book_is_active(!book.is_active)
+    changeset_on_bookshelf = book |> Admin.change_book |> Admin.change_book_on_bookshelf(!book.on_bookshelf)
+    render(conn, "show.html", book: book, changeset_is_active: changeset_is_active, changeset_on_bookshelf: changeset_on_bookshelf)
   end
 
   def edit(conn, %{"id" => id}) do

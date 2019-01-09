@@ -6,6 +6,26 @@
       item_name: to_s(@book)) 
 %>
 
+<%=
+  form_for @changeset_is_active, Routes.book_path(@conn, :update, @book), [class: "book_active_form"], fn f ->
+    [
+      hidden_input(f, :is_active), 
+      hidden_input(f, :on_bookshelf), 
+      submit(is_active_button_text(@book.is_active), class: changeset_button_css_class(@book.is_active))
+    ]
+  end
+%>
+
+<%=
+  form_for @changeset_on_bookshelf, Routes.book_path(@conn, :update, @book), [class: "book_active_form"], fn f ->
+    [
+      hidden_input(f, :is_active), 
+      hidden_input(f, :on_bookshelf), 
+      submit(on_bookshelf_button_text(@book.on_bookshelf), class: changeset_button_css_class(@book.on_bookshelf))
+    ]
+  end
+%>
+
 <ul>
 
   <li>

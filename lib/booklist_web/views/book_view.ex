@@ -47,4 +47,41 @@ defmodule BooklistWeb.BookView do
   def inactive_read_book_path(conn) do
     Routes.book_path(conn, :index, active: "false", read: "true")
   end
+
+  @doc """
+  Button text for button to change book's is_active property
+  Argument is book's current is_active property
+  """
+  def is_active_button_text(true) do
+    "Active"
+  end
+
+  def is_active_button_text(false) do
+    "Inactive"
+  end
+
+  @doc """
+  Button text for button to change book's on_bookshelf property
+  Argument is book's current on_bookshelf property
+  """
+  def on_bookshelf_button_text(true) do
+    "On bookshelf"
+  end
+
+  def on_bookshelf_button_text(false) do
+    "Not on bookshelf"
+  end
+
+  @doc """
+  CSS classes for buttons to change book's is_active and on_bookshelf properties
+  Argument is book's current is_active or on_bookshelf property
+  """
+  def changeset_button_css_class(true) do
+    "btn btn-primary"
+  end
+
+  def changeset_button_css_class(false) do
+    "btn btn-default"
+  end
+
 end

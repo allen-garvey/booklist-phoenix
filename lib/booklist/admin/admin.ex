@@ -350,6 +350,38 @@ defmodule Booklist.Admin do
     Book.changeset(book, %{})
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` with is_active property changed
+  Second param is what is_active should be changed to
+  """
+  def change_book_is_active(book_changeset, true) do
+    book_changeset
+      |> Ecto.Changeset.put_change(:is_active, true)
+  end
+
+  def change_book_is_active(book_changeset, false) do
+    book_changeset
+      |> Ecto.Changeset.put_change(:is_active, false)
+      #book can't be inactive and still on bookshelf
+      |> Ecto.Changeset.put_change(:on_bookshelf, false)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` with on_bookshelf property changed
+  Second param is what on_bookshelf should be changed to
+  """
+  def change_book_on_bookshelf(book_changeset, true) do
+    book_changeset
+      |> Ecto.Changeset.put_change(:on_bookshelf, true)
+      #is_active property has to be true when on_bookshelf is true
+      |> Ecto.Changeset.put_change(:is_active, true)
+  end
+
+  def change_book_on_bookshelf(book_changeset, false) do
+    book_changeset
+      |> Ecto.Changeset.put_change(:on_bookshelf, false)
+  end
+
   alias Booklist.Admin.Library
 
   @doc """
