@@ -211,14 +211,14 @@ defmodule Booklist.Admin do
 
   """
   def list_books do
-    Repo.all(from(Book, order_by: [:title, :id]))
+    Repo.all(from(Book, order_by: [:sort_title, :id]))
   end
 
   @doc """
   Returns the list of books by whether or not they are active
   """
   def list_books_active(is_active) when is_boolean(is_active) do
-    Repo.all(from(b in Book, where: b.is_active == ^is_active, order_by: [:title, :id]))
+    Repo.all(from(b in Book, where: b.is_active == ^is_active, order_by: [:sort_title, :id]))
   end
 
   @doc """
@@ -238,7 +238,7 @@ defmodule Booklist.Admin do
   end
 
   def list_books_read_query(false) do
-    from(b in Book, where: not(b.id in ^rated_book_ids()), order_by: [:title, :id])
+    from(b in Book, where: not(b.id in ^rated_book_ids()), order_by: [:sort_title, :id])
   end
 
   @doc """
