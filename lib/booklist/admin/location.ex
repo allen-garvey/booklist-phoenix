@@ -8,6 +8,7 @@ defmodule Booklist.Admin.Location do
 
     belongs_to :library, Booklist.Admin.Library
 
+    has_many :book_locations, Booklist.Admin.BookLocation
     many_to_many :books, Booklist.Admin.Book, join_through: Booklist.Admin.BookLocation
 
     timestamps()

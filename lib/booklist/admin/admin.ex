@@ -627,6 +627,7 @@ defmodule Booklist.Admin do
   def get_location!(id) do 
     from(l in Location, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, limit: 1)
       |> Repo.one!
+      |> Repo.preload([book_locations: (from b_l in BookLocation, join: book in assoc(b_l, :book), preload: [:book], where: book.is_active == true, order_by: book.sort_title)])
   end
 
   @doc """

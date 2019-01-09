@@ -22,4 +22,12 @@ defmodule BooklistWeb.BookLocationView do
   def to_s_with_call_number(string, call_number) do
   	string <> "—" <> call_number
   end
+
+  def super_search_direct_link(_library, nil) do
+  	content_tag(:span, "")
+  end
+
+  def super_search_direct_link(_library, call_number) do
+  	link call_number, to: "https://google.com", class: "super_search_link"
+  end
 end
