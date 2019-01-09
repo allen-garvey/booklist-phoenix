@@ -285,6 +285,7 @@ defmodule Booklist.Admin do
     #left_join author, since might be nil
     from(b in Book, left_join: author in assoc(b, :author), join: genre in assoc(b, :genre), preload: [author: author, genre: genre], where: b.id == ^id, limit: 1)
       |> Repo.one!
+      |> Repo.preload([ratings: (from r in Rating, order_by: [desc: r.date_scored, desc: r.id])])
   end
 
   @doc """

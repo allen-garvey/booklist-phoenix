@@ -58,3 +58,17 @@
   </li>
 
 </ul>
+
+<div class="show_category">
+  <div class="show_category_header">
+    <h3>Ratings</h3>
+    <div class="btn_group">
+      <a href="" class="btn btn-success">Add rating</a>
+    </div>
+  </div>
+  <ul class="show_categories_list indented_list">
+    <%= for rating <- @book.ratings do %>
+      <li><%= link BooklistWeb.RatingView.to_s_short(rating), to: Routes.rating_path(@conn, :show, rating) %></li>
+    <% end %>
+  </ul>
+</div>
