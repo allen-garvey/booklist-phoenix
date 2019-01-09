@@ -524,7 +524,7 @@ defmodule Booklist.Admin do
 
   """
   def get_loan!(id) do
-    from(l in Loan, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, order_by: [:due_date, library.name], limit: 1)
+    from(l in Loan, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, limit: 1)
       |> Repo.one!
   end
 
@@ -624,7 +624,7 @@ defmodule Booklist.Admin do
 
   """
   def get_location!(id) do 
-    from(l in Location, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, order_by: [library.name, :name], limit: 1)
+    from(l in Location, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, limit: 1)
       |> Repo.one!
   end
 
@@ -724,7 +724,7 @@ defmodule Booklist.Admin do
 
   """
   def get_book_location!(id) do
-    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), preload: [location: location, book: book], where: b_l.id == ^id, order_by: [book.title, location.name], limit: 1)
+    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), preload: [location: location, book: book], where: b_l.id == ^id, limit: 1)
       |> Repo.one!
   end
 
