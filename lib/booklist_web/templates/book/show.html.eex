@@ -61,6 +61,17 @@
 
 <div class="show_category">
   <div class="show_category_header">
+    <h3>Locations</h3>
+  </div>
+  <ul class="show_categories_list indented_list">
+    <%= for book_location <- @book.book_locations do %>
+      <li><%= link BooklistWeb.BookLocationView.to_s_location(book_location), to: Routes.book_location_path(@conn, :show, book_location) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="show_category">
+  <div class="show_category_header">
     <h3>Ratings</h3>
     <div class="btn_group">
       <a href="" class="btn btn-success">Add rating</a>

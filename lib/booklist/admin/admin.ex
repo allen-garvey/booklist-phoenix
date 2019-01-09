@@ -9,6 +9,8 @@ defmodule Booklist.Admin do
   alias Booklist.Admin.Rating
   alias Booklist.Admin.Genre
   alias Booklist.Admin.Book
+  alias Booklist.Admin.Location
+  alias Booklist.Admin.BookLocation
 
   @doc """
   Returns the list of genres.
@@ -286,6 +288,7 @@ defmodule Booklist.Admin do
     from(b in Book, left_join: author in assoc(b, :author), join: genre in assoc(b, :genre), preload: [author: author, genre: genre], where: b.id == ^id, limit: 1)
       |> Repo.one!
       |> Repo.preload([ratings: (from r in Rating, order_by: [desc: r.date_scored, desc: r.id])])
+      |> Repo.preload([book_locations: (from b_l in BookLocation, join: location in assoc(b_l, :location), join: library in assoc(location, :library), preload: [location: {location, library: library}], order_by: location.name)])
   end
 
   @doc """
@@ -593,8 +596,6 @@ defmodule Booklist.Admin do
     Loan.changeset(loan, %{})
   end
 
-  alias Booklist.Admin.Location
-
   @doc """
   Returns the list of locations.
 
@@ -693,8 +694,6 @@ defmodule Booklist.Admin do
     Location.changeset(location, %{})
   end
 
-  alias Booklist.Admin.BookLocation
-
   @doc """
   Returns the list of book_locations.
 
@@ -705,7 +704,7 @@ defmodule Booklist.Admin do
 
   """
   def list_book_locations do
-    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), preload: [location: location, book: book],  order_by: [book.title, location.name])
+    from(b_l in BookLocation, join: location in assoc(b_l, :location), join: book in assoc(b_l, :book), preload: [location: location, book: book], order_by: [book.title, location.name])
       |> Repo.all
   end
 

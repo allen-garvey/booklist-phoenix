@@ -16,6 +16,7 @@ defmodule Booklist.Admin.Book do
 
     has_many :ratings, Booklist.Admin.Rating
 
+    has_many :book_locations, Booklist.Admin.BookLocation
     many_to_many :locations, Booklist.Admin.Location, join_through: Booklist.Admin.BookLocation
 
     timestamps()
