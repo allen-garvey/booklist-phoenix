@@ -1,6 +1,8 @@
 defmodule BooklistWeb.PageController do
   use BooklistWeb, :controller
 
+  alias Booklist.Admin
+
   def index(conn, _params) do
     loans_due_soon = Booklist.Admin.list_loans_due_soon()
     
@@ -20,5 +22,11 @@ defmodule BooklistWeb.PageController do
   	]
 
   	render(conn, "resources.html", resources: resources_list)
+  end
+
+  def bookshelf(conn, _params) do
+    books = Admin.list_bookshelf_books()
+
+    render(conn, "bookshelf.html", books: books)
   end
 end

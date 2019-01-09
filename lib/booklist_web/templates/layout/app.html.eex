@@ -14,7 +14,7 @@
           <%= link "Booklist", to: Routes.page_path(@conn, :index), class: "brand nav_heading" %>
           <ul class='nav_links clearfix'>
             <li><%= link "Books", to: BooklistWeb.BookView.active_book_path(@conn) %></li>
-            <li><a href="">Bookshelf</a></li>
+            <li><%= link "Bookshelf", to: Routes.page_path(@conn, :bookshelf) %></li>
             <li><%= link "Libraries", to: Routes.library_path(@conn, :index) %></li>
             <li><%= link "Loans", to: Routes.loan_path(@conn, :index) %></li>
             <li><%= link "Add Book", to: Routes.book_path(@conn, :new), class: "btn btn-success" %></li>

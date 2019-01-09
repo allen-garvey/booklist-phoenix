@@ -215,6 +215,13 @@ defmodule Booklist.Admin do
   end
 
   @doc """
+  Returns the list of books on bookshelf
+  """
+  def list_bookshelf_books do
+    Repo.all(from(b in Book, where: b.on_bookshelf == true, order_by: [:sort_title, :id]))
+  end
+
+  @doc """
   Returns the list of books by whether or not they are active
   """
   def list_books_active(is_active) when is_boolean(is_active) do
