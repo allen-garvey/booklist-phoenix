@@ -2,6 +2,10 @@
 * Site base styles
 */
 
+.alert:empty{
+	display: none;
+}
+
 .form-control{
 	@include font_size(1);
 	box-sizing: border-box;
