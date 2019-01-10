@@ -13,11 +13,24 @@ defmodule Booklist.Admin.Library do
     timestamps()
   end
 
+  @doc """
+  Simple validation of url using regex
+  """
+  def validate_url(changeset, attribute_key) do
+    url = get_field(changeset, attribute_key)
+    if !is_nil(url) and !Regex.match?(~r/https?:\/\/.+\.\w+/, url) do
+      add_error(changeset, attribute_key, "Not a valid url")
+    else
+      changeset
+    end
+  end
+
   @doc false
   def changeset(library, attrs) do
     library
     |> cast(attrs, [:name, :url, :super_search_key])
     |> validate_required([:name])
+    |> validate_url(:url)
     |> unique_constraint(:name)
   end
 end
