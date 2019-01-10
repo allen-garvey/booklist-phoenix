@@ -6,6 +6,12 @@
       item_name: to_s(@loan)) 
 %>
 
+<%= 
+	if !is_nil(@loan.library.url) do 
+		link "Renew loan", to: @loan.library.url
+	end
+%>
+
 <ul>
 
 	<li>
