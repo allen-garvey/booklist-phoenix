@@ -15,7 +15,11 @@
 
   <li>
     <strong>Url:</strong>
-    <%= @library.url %>
+    <%= 
+      if !is_nil(@library.url) do 
+        link @library.url, to: @library.url
+      end
+    %>
   </li>
 
   <li>
