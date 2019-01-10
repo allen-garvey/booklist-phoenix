@@ -59,10 +59,11 @@ defmodule BooklistWeb.LoanController do
 
   def delete(conn, %{"id" => id}) do
     loan = Admin.get_loan!(id)
+    item_name = BooklistWeb.LoanView.to_s(loan)
     {:ok, _loan} = Admin.delete_loan(loan)
 
     conn
-    |> put_flash(:info, "Loan deleted successfully.")
+    |> put_flash(:info, item_name <> " deleted.")
     |> redirect(to: Routes.loan_path(conn, :index))
   end
 end

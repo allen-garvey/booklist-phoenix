@@ -53,10 +53,11 @@ defmodule BooklistWeb.LibraryController do
 
   def delete(conn, %{"id" => id}) do
     library = Admin.get_library!(id)
+    item_name = BooklistWeb.LibraryView.to_s(library)
     {:ok, _library} = Admin.delete_library(library)
 
     conn
-    |> put_flash(:info, "Library deleted successfully.")
+    |> put_flash(:info, item_name <> " deleted.")
     |> redirect(to: Routes.library_path(conn, :index))
   end
 end

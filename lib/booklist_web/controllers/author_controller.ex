@@ -53,10 +53,11 @@ defmodule BooklistWeb.AuthorController do
 
   def delete(conn, %{"id" => id}) do
     author = Admin.get_author!(id)
+    item_name = BooklistWeb.AuthorView.to_s(author)
     {:ok, _author} = Admin.delete_author(author)
 
     conn
-    |> put_flash(:info, "Author deleted successfully.")
+    |> put_flash(:info, item_name <> " deleted.")
     |> redirect(to: Routes.author_path(conn, :index))
   end
 end

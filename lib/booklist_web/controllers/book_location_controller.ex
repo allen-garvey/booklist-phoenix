@@ -60,10 +60,11 @@ defmodule BooklistWeb.BookLocationController do
 
   def delete(conn, %{"id" => id}) do
     book_location = Admin.get_book_location!(id)
+    item_name = BooklistWeb.BookLocationView.to_s(book_location)
     {:ok, _book_location} = Admin.delete_book_location(book_location)
 
     conn
-    |> put_flash(:info, "Book location deleted successfully.")
+    |> put_flash(:info, item_name <> " deleted.")
     |> redirect(to: Routes.book_location_path(conn, :index))
   end
 end

@@ -53,10 +53,11 @@ defmodule BooklistWeb.GenreController do
 
   def delete(conn, %{"id" => id}) do
     genre = Admin.get_genre!(id)
+    item_name = BooklistWeb.GenreView.to_s(genre)
     {:ok, _genre} = Admin.delete_genre(genre)
 
     conn
-    |> put_flash(:info, "Genre deleted successfully.")
+    |> put_flash(:info, item_name <> " deleted.")
     |> redirect(to: Routes.genre_path(conn, :index))
   end
 end

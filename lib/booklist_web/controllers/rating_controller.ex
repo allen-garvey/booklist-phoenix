@@ -59,10 +59,11 @@ defmodule BooklistWeb.RatingController do
 
   def delete(conn, %{"id" => id}) do
     rating = Admin.get_rating!(id)
+    item_name = BooklistWeb.RatingView.to_s(rating)
     {:ok, _rating} = Admin.delete_rating(rating)
 
     conn
-    |> put_flash(:info, "Rating deleted successfully.")
+    |> put_flash(:info, item_name <> " deleted.")
     |> redirect(to: Routes.rating_path(conn, :index))
   end
 end
