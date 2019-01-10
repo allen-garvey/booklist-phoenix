@@ -39,7 +39,7 @@ defmodule BooklistWeb.BookLocationView do
   end
 
   def super_search_direct_link(_library, nil) do
-  	content_tag(:span, "")
+  	content_tag(:span, "", class: "super_search_link")
   end
 
   def super_search_direct_link(_library, call_number) do
