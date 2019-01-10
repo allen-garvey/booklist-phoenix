@@ -419,7 +419,7 @@ defmodule Booklist.Admin do
   """
   def get_library!(id) do
     Repo.get!(Library, id)
-      |> Repo.preload([{:locations, [{:book_locations, [{:book, :author}]}]}])
+      |> Repo.preload([locations: [book_locations: [book: :author]]])
   end
 
   @doc """
