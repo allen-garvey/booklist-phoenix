@@ -6,7 +6,7 @@
       item_name: to_s(@book)) 
 %>
 
-<%= render("changeset_button.html", 
+<%= render("changeset-button.html", 
       conn: @conn, 
       book: @book, 
       changeset: @changeset_is_active, 
@@ -14,7 +14,7 @@
       button_class: changeset_button_css_class(@book.is_active))
 %>
 
-<%= render("changeset_button.html", 
+<%= render("changeset-button.html", 
       conn: @conn, 
       book: @book, 
       changeset: @changeset_on_bookshelf, 
