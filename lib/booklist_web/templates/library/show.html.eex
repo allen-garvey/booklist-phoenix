@@ -28,3 +28,25 @@
   </li>
 
 </ul>
+
+<div>
+  <div class="show_category_header">
+    <h2>Locations</h2>
+    <div class="btn_group">
+      <a href="" class="btn btn-success">Add location</a>
+    </div>
+  </div>
+  <ul class="show_categories_list">
+    <%= for location <- @library.locations do %>
+      <li>
+        <h3><%= link BooklistWeb.LocationView.to_s(location), to: Routes.location_path(@conn, :show, location) %></h3>
+        <div class="show_subcategory">
+          <h4 class="subcategory_heading">Books</h4>
+          <button class="btn btn-primary btn-xs">QR Code</button>
+
+          <%= render(BooklistWeb.LocationView, "book-list.html", conn: @conn, location: location, library: @library) %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

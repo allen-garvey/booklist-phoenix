@@ -417,7 +417,10 @@ defmodule Booklist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_library!(id), do: Repo.get!(Library, id)
+  def get_library!(id) do
+    Repo.get!(Library, id)
+      |> Repo.preload([{:locations, [{:book_locations, [{:book, :author}]}]}])
+  end
 
   @doc """
   Creates a library.
