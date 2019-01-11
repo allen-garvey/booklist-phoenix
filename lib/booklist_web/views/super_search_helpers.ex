@@ -4,7 +4,9 @@ defmodule BooklistWeb.SuperSearchHelpers do
 	end
 
 	def search_url(query) do
-		base_url() <> "/?q=" <> query
+		"#{base_url()}/?q=#{query}"
+			|> URI.encode
+	end
 			|> URI.encode
 	end
 end
