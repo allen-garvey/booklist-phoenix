@@ -418,7 +418,7 @@ defmodule Booklist.Admin do
 
   """
   def get_library!(id) do
-    book_location_query = from(b_l in BookLocation, join: book in assoc(b_l, :book), left_join: author in assoc(book, :author), preload: [book: {book, [author: author]}], order_by: book.sort_title)
+    book_location_query = from(b_l in BookLocation, join: book in assoc(b_l, :book), left_join: author in assoc(book, :author), preload: [book: {book, [author: author]}], where: book.is_active == true and book.on_bookshelf == false, order_by: book.sort_title)
     location_query = from(l in Location, preload: [book_locations: ^book_location_query])
 
     Repo.get!(Library, id)
@@ -633,7 +633,7 @@ defmodule Booklist.Admin do
   def get_location!(id) do 
     from(l in Location, join: library in assoc(l, :library), preload: [library: library], where: l.id == ^id, limit: 1)
       |> Repo.one!
-      |> Repo.preload([book_locations: (from b_l in BookLocation, join: book in assoc(b_l, :book), left_join: author in assoc(book, :author), preload: [book: {book, author: author}], where: book.is_active == true, order_by: book.sort_title)])
+      |> Repo.preload([book_locations: (from b_l in BookLocation, join: book in assoc(b_l, :book), left_join: author in assoc(book, :author), preload: [book: {book, author: author}], where: book.is_active == true and book.on_bookshelf == false, order_by: book.sort_title)])
   end
 
   @doc """
