@@ -33,7 +33,7 @@
   <div class="show_category_header">
     <h2>Locations</h2>
     <div class="btn_group">
-      <a href="" class="btn btn-success">Add location</a>
+      <%= link "Add location", to: Routes.location_path(@conn, :new, @library.id), class: "btn btn-success" %>
     </div>
   </div>
   <ul class="show_categories_list">

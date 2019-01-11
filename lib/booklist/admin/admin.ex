@@ -702,6 +702,15 @@ defmodule Booklist.Admin do
   end
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for tracking location changes.
+  Initialized with given library_id
+  """
+  def change_location_with_library(%Location{} = location, library_id) do
+    Location.changeset(location, %{})
+      |> Ecto.Changeset.put_change(:library_id, library_id)
+  end
+
+  @doc """
   Returns the list of book_locations.
 
   ## Examples
