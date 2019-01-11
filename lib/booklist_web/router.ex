@@ -20,11 +20,6 @@ defmodule BooklistWeb.Router do
     get "/resources", PageController, :resources
     get "/bookshelf", PageController, :bookshelf
 
-    get "/books/:book_id/locations/new", BookLocationController, :new
-    get "/books/:book_id/ratings/new", RatingController, :new
-
-    get "/libraries/:library_id/locations/new", LocationController, :new
-
     resources "/authors", AuthorController
     resources "/books", BookController
     resources "/book-locations", BookLocationController
@@ -33,6 +28,12 @@ defmodule BooklistWeb.Router do
     resources "/loans", LoanController
     resources "/locations", LocationController
     resources "/ratings", RatingController
+
+    #routes with duplicate methods have to be after resource routes, or they cause errors on index pages
+    get "/books/:book_id/locations/new", BookLocationController, :new
+    get "/books/:book_id/ratings/new", RatingController, :new
+
+    get "/libraries/:library_id/locations/new", LocationController, :new
   end
 
   # Other scopes may use custom stacks.
