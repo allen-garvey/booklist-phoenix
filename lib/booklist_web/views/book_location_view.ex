@@ -38,7 +38,11 @@ defmodule BooklistWeb.BookLocationView do
   	string <> "—" <> call_number
   end
 
-  def super_search_direct_link(_library, call_number) do
-  	link call_number, to: "https://google.com", class: "super_search_link"
+  def super_search_direct_link(nil, _search_query, _link_text) do
+  	content_tag(:span, "", class: "super_search_link")
+  end
+
+  def super_search_direct_link(library_key, search_query, link_text) do
+    link link_text, to: BooklistWeb.SuperSearchHelpers.direct_search_url(library_key, search_query), class: "super_search_link"
   end
 end
