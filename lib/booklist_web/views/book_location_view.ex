@@ -19,7 +19,7 @@ defmodule BooklistWeb.BookLocationView do
   	if book.is_fiction and !is_nil(book.author) and !is_nil(book.author.last_name) do
   		book.author.last_name
   	else
-  		nil
+  		book.title
   	end
   end
 
@@ -36,10 +36,6 @@ defmodule BooklistWeb.BookLocationView do
 
   def to_s_with_call_number(string, call_number) do
   	string <> "—" <> call_number
-  end
-
-  def super_search_direct_link(_library, nil) do
-  	content_tag(:span, "", class: "super_search_link")
   end
 
   def super_search_direct_link(_library, call_number) do
