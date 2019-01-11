@@ -84,4 +84,8 @@ defmodule BooklistWeb.BookView do
     "btn btn-default"
   end
 
+  def super_search_path(book) do
+    BooklistWeb.SuperSearchHelpers.search_url(book.title)
+  end
+
 end
