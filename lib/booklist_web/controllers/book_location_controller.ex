@@ -16,20 +16,33 @@ defmodule BooklistWeb.BookLocationController do
     render(conn, "index.html", book_locations: book_locations)
   end
 
+  def new(conn, %{"book_id" => book_id}) do
+    changeset = Admin.change_book_location_with_book(%BookLocation{}, book_id)
+    render(conn, "new.html", [changeset: changeset, referrer: "book"] ++ related_fields())
+  end
+
   def new(conn, _params) do
     changeset = Admin.change_book_location(%BookLocation{})
     render(conn, "new.html", [changeset: changeset] ++ related_fields())
   end
 
+  def create(conn, %{"book_location" => book_location_params, "referrer" => "book"}) do
+    create_action(conn, book_location_params, fn (conn, book_location) -> Routes.book_path(conn, :show, book_location.book_id) end, "book")
+  end
+
   def create(conn, %{"book_location" => book_location_params}) do
+    create_action(conn, book_location_params, fn (conn, book_location) -> Routes.book_location_path(conn, :show, book_location) end)
+  end
+
+  def create_action(conn, book_location_params, success_redirect_callback, referrer \\ nil) when is_function(success_redirect_callback, 2) do
     case Admin.create_book_location(book_location_params) do
       {:ok, book_location} ->
         conn
         |> put_flash(:info, "Book location created successfully.")
-        |> redirect(to: Routes.book_location_path(conn, :show, book_location))
+        |> redirect(to: success_redirect_callback.(conn, book_location))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", [changeset: changeset] ++ related_fields())
+        render(conn, "new.html", [changeset: changeset, referrer: referrer] ++ related_fields())
     end
   end
 

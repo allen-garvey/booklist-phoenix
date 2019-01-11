@@ -800,6 +800,15 @@ defmodule Booklist.Admin do
   end
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for tracking book_location changes.
+  Initialized with given book_id
+  """
+  def change_book_location_with_book(%BookLocation{} = book_location, book_id) do
+    BookLocation.changeset(book_location, %{})
+      |> Ecto.Changeset.put_change(:book_id, book_id)
+  end
+
+  @doc """
   Returns the list of ratings.
 
   ## Examples
