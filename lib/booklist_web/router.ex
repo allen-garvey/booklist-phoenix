@@ -21,6 +21,7 @@ defmodule BooklistWeb.Router do
     get "/bookshelf", PageController, :bookshelf
 
     get "/books/:book_id/locations/new", BookLocationController, :new
+    get "/books/:book_id/ratings/new", RatingController, :new
 
     resources "/authors", AuthorController
     resources "/books", BookController

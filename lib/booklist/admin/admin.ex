@@ -905,4 +905,13 @@ defmodule Booklist.Admin do
   def change_rating(%Rating{} = rating) do
     Rating.changeset(rating, %{})
   end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking rating changes.
+  Initialized with given book_id
+  """
+  def change_rating_with_book(%Rating{} = rating, book_id) do
+    Rating.changeset(rating, %{})
+      |> Ecto.Changeset.put_change(:book_id, book_id)
+  end
 end
