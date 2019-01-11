@@ -14,6 +14,13 @@ defmodule BooklistWeb.BookView do
   end
 
   @doc """
+  Used for super search queries
+  """
+  def to_search_query(book) do
+    book.title
+  end
+
+  @doc """
   Maps a list of books into tuples, used for forms
   """
   def map_for_form(books) do
@@ -82,10 +89,6 @@ defmodule BooklistWeb.BookView do
 
   def changeset_button_css_class(false) do
     "btn btn-default"
-  end
-
-  def super_search_path(book) do
-    BooklistWeb.SuperSearchHelpers.search_url(book.title)
   end
 
 end

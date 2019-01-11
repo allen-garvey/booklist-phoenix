@@ -11,8 +11,8 @@
 				submit("Delete", class: "btn btn-danger btn-xs")
 			end
 		%>
-		<%= if assigns[:search_path] do
-				link content_tag(:div, "⚲", class: "search_icon"), to: @search_path, class: "btn btn-primary btn-xs btn_search"	
+		<%= if assigns[:search_query] do
+				link content_tag(:div, "⚲", class: "search_icon"), to: BooklistWeb.SuperSearchHelpers.search_url(@search_query), class: "btn btn-primary btn-xs btn_search"	
 			end 
 		%>
 	</div>

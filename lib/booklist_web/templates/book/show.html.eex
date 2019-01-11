@@ -4,7 +4,7 @@
       resource_path_atom: :book_path, 
       item: @book, 
       item_name: to_s(@book),
-      search_path: super_search_path(@book)
+      search_query: to_search_query(@book)
     ) 
 %>
 
