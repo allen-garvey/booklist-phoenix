@@ -3,7 +3,7 @@
 <% #can't have whitespace in alert, or alert:empty CSS will break %>
 <div class="alert alert-info"><%= get_flash(@conn, :info) %></div>
 
-<div class="show_header">
+<div class="show_header show">
 	<h1 class="heading"><%= @item_name %></h1>
 	<div class="btn_group">
 		<%= link "Edit", to: apply(Routes, @resource_path_atom, [@conn, :edit, @item]), class: "btn btn-default btn-xs" %>
