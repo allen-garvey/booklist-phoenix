@@ -67,7 +67,7 @@
 	li{
 		margin-bottom: 1em;
 	}
-	& > li a:first-child{
+	a{
 		display: inline-block;
 		vertical-align: top;
 		width: 20em;
@@ -84,6 +84,7 @@
 	.btn_search{
 		padding-left: 1em;
 		padding-right: 1em;
+		width: 7em;
 	}
 }
 .book_active_form{
