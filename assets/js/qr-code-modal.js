@@ -3,7 +3,7 @@
  * 
  */
 
- // import { QRCode } from './qr-code.js';
+ import { qrCodeGenerator } from './qrcode-generator.js';
  import { closest } from './dom.js';
  import { modalAlert } from './modal.js';
 
@@ -37,12 +37,11 @@ function displayQrCode(caller){
 	});
 
 	const qrCodeElement = document.createElement('div');
-	qrCodeElement.id = 'qr_code';
 	fragment.appendChild(qrCodeElement);
 	
 	if(qrCodeContent){
 		modalAlert({bodyFragment : fragment});
-	// generateQrCode(qrCodeContent);
+		generateQrCode(qrCodeContent, qrCodeElement);
 	}
 	else{
 		modalAlert({bodyText: 'No books checked for QR Code!'});
@@ -50,15 +49,11 @@ function displayQrCode(caller){
 	
 };
 
-/*
-function generateQrCode(code_content){
-	var qr_code_element = document.getElementById("qr_code");
-	qr_code_element.title = '';
-	qr_code_element.innerHTML = '';
-	//too long code_content can cause overflow error
+function generateQrCode(textContent, qrCodeElement){
+	//note that is limited to QR Code version 40, which has 4296 character limit
 	try{
-		new QRCode(qr_code_element, {
-			text : code_content,
+		qrCodeGenerator(qrCodeElement, {
+			text : textContent,
 			width : 500,
 			height : 500
 		});	
@@ -67,7 +62,7 @@ function generateQrCode(code_content){
 		console.log(e);
 	}
 };
-*/
+
 
 export function initializeQRCodeButtons(){
 	document.querySelectorAll(`.${parentClassName} [data-role="qr-button"]`).forEach((button)=>{
