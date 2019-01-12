@@ -11,11 +11,11 @@ export function modalConfirm(callback, options = {}){
 	const modal = document.getElementById('modal');
 	modal.classList.remove('alert');
 	modal.classList.add('confirm');
-	document.getElementById('modal_body').innerHTML = options.modalText || "";
+	document.getElementById('modal_body').textContent = options.modalText || "";
 	const confirmButton = document.getElementById('modal_confirm_confirm');
-	confirmButton.innerHTML = options.confirmButtonText || 'Delete';
+	confirmButton.textContent = options.confirmButtonText || 'Delete';
 	const cancelButton = document.getElementById('modal_confirm_cancel');
-	cancelButton.innerHTML = options.cancelButtonText || 'Cancel';
+	cancelButton.textContent = options.cancelButtonText || 'Cancel';
 	cancelButton.onclick = hideModal;
 	confirmButton.onclick = callback;
 	showModal();
