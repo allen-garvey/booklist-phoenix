@@ -19,3 +19,7 @@ import css from "../css/app.scss"
 import { initializeDeleteModals } from './delete-modals.js';
 
 initializeDeleteModals();
+
+import { initializeQRCodeButtons } from './qr-code-modal.js';
+
+initializeQRCodeButtons();

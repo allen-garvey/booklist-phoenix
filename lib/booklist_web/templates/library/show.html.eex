@@ -40,10 +40,8 @@
     <%= for location <- @library.locations do %>
       <li>
         <h3><%= link BooklistWeb.LocationView.to_s(location), to: Routes.location_path(@conn, :show, location) %></h3>
-        <div class="show_subcategory">
+        <div class="show_subcategory js_qr_parent">
           <h4 class="subcategory_heading">Books</h4>
-          <button class="btn btn-primary btn-xs">QR Code</button>
-
           <%= render(BooklistWeb.LocationView, "book-list.html", conn: @conn, location: location, library: @library) %>
         </div>
       </li>

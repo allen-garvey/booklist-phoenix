@@ -20,8 +20,7 @@
 
 </ul>
 
-<div>
+<div class="js_qr_parent">
 	<h3>Books</h3>
-	<button class="btn btn-primary btn-xs">QR Code</button>
 	<%= render("book-list.html", conn: @conn, location: @location, library: @location.library)  %>
 </div>
