@@ -25,9 +25,17 @@ export function modalAlert(options = {}){
 	const modal = document.getElementById('modal');
 	modal.classList.remove('confirm');
 	modal.classList.add('alert');
-	document.getElementById('modal_body').innerHTML = options.modalText || "";
+	if(options.bodyFragment){
+		const modalBody = document.getElementById('modal_body');
+		modalBody.innerHTML = '';
+		modalBody.appendChild(options.bodyFragment);
+	}
+	else if(options.bodyText){
+		const modalBody = document.getElementById('modal_body');
+		modalBody.textContent = options.bodyText;
+	}
 	const confirmButton = document.getElementById('modal_alert_confirm');
-	confirmButton.innerHTML = options.confirmButtonText || 'Ok';
+	confirmButton.textContent = options.confirmButtonText || 'Ok';
 	confirmButton.onclick = hideModal;
 	showModal();
 };
