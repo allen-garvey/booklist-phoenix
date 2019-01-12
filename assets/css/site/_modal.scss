@@ -23,6 +23,8 @@
 }
 .modal{
 	@include font_size(1);
+	position: fixed;
+	top: 1em;
 	margin-top: auto;
 	margin-bottom: auto;
 	z-index: 2;
