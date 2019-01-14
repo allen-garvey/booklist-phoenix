@@ -30,8 +30,8 @@
         <li><%= link "Resources", to: Routes.page_path(@conn, :resources) %></li>
         <li><%= link "Add Author", to: Routes.author_path(@conn, :new) %></li>
         <li><%= link "Authors", to: Routes.author_path(@conn, :index) %></li>
-        <li><a href=""><%= link "Inactive books", to: BooklistWeb.BookView.inactive_unread_book_path(@conn) %></a></li>
-        <li><a href=""><%= link "Finished books", to: BooklistWeb.BookView.inactive_read_book_path(@conn) %></a></li>
+        <li><%= link "Inactive books", to: BooklistWeb.BookView.inactive_unread_book_path(@conn) %></li>
+        <li><%= link "Finished books", to: BooklistWeb.BookView.inactive_read_book_path(@conn) %></li>
         <li><%= link "Reports", to: BooklistWeb.ReportsView.reports_for_current_year_path(@conn) %></li>
       </ul>
     </div>
