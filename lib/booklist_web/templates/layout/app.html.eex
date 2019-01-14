@@ -32,7 +32,7 @@
         <li><%= link "Authors", to: Routes.author_path(@conn, :index) %></li>
         <li><a href=""><%= link "Inactive books", to: BooklistWeb.BookView.inactive_unread_book_path(@conn) %></a></li>
         <li><a href=""><%= link "Finished books", to: BooklistWeb.BookView.inactive_read_book_path(@conn) %></a></li>
-        <li><a href="">Reporting</a></li>
+        <li><%= link "Reports", to: BooklistWeb.ReportsView.reports_for_current_year_path(@conn) %></li>
       </ul>
     </div>
     <div class="modal_container" id="modal_container" style="display:none;">
