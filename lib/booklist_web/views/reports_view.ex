@@ -9,4 +9,18 @@ defmodule BooklistWeb.ReportsView do
     Routes.reports_path(conn, :show, current_year)
   end
 
+  @doc """
+  Rounds decimal
+  Safe to use if decimal is nil
+  """
+  def round_decimal(nil) do
+    0
+  end 
+
+  def round_decimal(decimal) do
+    decimal
+      |> Decimal.to_float 
+      |> Float.round(2)
+  end
+
 end
