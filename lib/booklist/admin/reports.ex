@@ -25,7 +25,7 @@ defmodule Booklist.Reports do
   end
 
   def get_rating_statistics(year) do
-  	from(r in Rating, where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year, select: %{count: count(r.id), average: avg(r.score)})
+  	from(r in Rating, where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year, select: %{count: count(r.id), average: coalesce(avg(r.score), 0)})
       |> Repo.one
   end
   @doc """
