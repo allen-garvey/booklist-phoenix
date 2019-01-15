@@ -23,4 +23,13 @@ defmodule BooklistWeb.ReportsView do
       |> Float.round(2)
   end
 
+  @doc """
+  Returns database results as json string
+  """
+  def ratings_by_week_to_json(results) do
+    results
+      |> Enum.map(fn result -> result[:count] end)
+      |> Poison.encode!(results)
+  end
+
 end

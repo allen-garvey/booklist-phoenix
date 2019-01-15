@@ -27,6 +27,12 @@
 	</div>
 </div>
 
+<section class="reporting_books_by_week">
+	<h2>Books Read Per Week</h2>
+	<div id="books_per_week_chart_data" style="display: none;"><%= ratings_by_week_to_json(@ratings_count_by_week) %></div>
+	<div class="books_per_week_chart" id="books_per_week_chart"></div>
+</section>
+
 <section>
 	<h2>Top Rated Books</h2>
 	<ol class="reporting_top_rated_books_list">
