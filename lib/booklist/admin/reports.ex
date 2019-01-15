@@ -35,7 +35,8 @@ defmodule Booklist.Reports do
   https://angelika.me/2016/09/10/how-to-order-by-the-result-of-select-count-in-ecto/
   """
   def get_ratings_count_by_week(year) do
-	from(r in Rating, right_join: week_number in fragment("SELECT generate_series(1,53) AS week_number"), on: fragment("week_number = extract(week FROM ?)", r.date_scored), where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year, group_by: [fragment("week_number")], select: %{week_number: fragment("week_number"), count: count(r.id)}, order_by: [fragment("week_number")])
+  	#need to check for nil in where clause for left joins to work
+	from(r in Rating, right_join: week_number in fragment("SELECT generate_series(1,53) AS week_number"), on: fragment("week_number = extract(week FROM ?)", r.date_scored), where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year or is_nil(r.id), group_by: [fragment("week_number")], select: %{week_number: fragment("week_number"), count: count(r.id)}, order_by: [fragment("week_number")], limit: fragment("SELECT EXTRACT(WEEK FROM current_timestamp)"))
   	  |> Repo.all	
   end
 
