@@ -54,7 +54,7 @@
   	data.addColumn('number', 'Count');
     data.addRows(<%= raw(ratings_by_week_to_json(@ratings_count_by_week)) %>);
     const options = {
-		// legend: { position: 'bottom' },
+		legend: { position: 'none' },
 		// curveType: 'function',
 		chartArea: {top: 55, height: '40%'},
 		hAxis: {
