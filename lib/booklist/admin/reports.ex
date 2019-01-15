@@ -30,7 +30,6 @@ defmodule Booklist.Reports do
   end
   @doc """
   Gets the week number and number of ratings (books read) in that week for the given year
-  Can't limit to current week, because Elixir has not yet implemented function to get week of the year
   How to group by using alias based on:
   https://angelika.me/2016/09/10/how-to-order-by-the-result-of-select-count-in-ecto/
   """
