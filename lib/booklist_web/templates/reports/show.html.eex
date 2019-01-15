@@ -29,7 +29,6 @@
 
 <section class="reporting_books_by_week">
 	<h2>Books Read Per Week</h2>
-	<div id="books_per_week_chart_data" style="display: none;"><%= ratings_by_week_to_json(@ratings_count_by_week) %></div>
 	<div class="books_per_week_chart" id="books_per_week_chart"></div>
 </section>
 
@@ -44,3 +43,25 @@
 		<% end %>
 	</ol>
 </section>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    const data = google.visualization.arrayToDataTable(<%= raw(ratings_by_week_to_json(@ratings_count_by_week)) %>);
+    const options = {
+		legend: { position: 'bottom' },
+		// curveType: 'function',
+		chartArea: {top: 55, height: '40%'},
+		hAxis: {
+			title: 'Week of the year'
+		},
+		vAxis: {
+			title: 'Books read'
+		}
+    };
+    const chart = new google.visualization.LineChart(document.getElementById('books_per_week_chart'));
+    chart.draw(data, options);
+  }
+</script>

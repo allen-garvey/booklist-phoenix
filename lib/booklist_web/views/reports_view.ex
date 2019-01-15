@@ -27,9 +27,8 @@ defmodule BooklistWeb.ReportsView do
   Returns database results as json string
   """
   def ratings_by_week_to_json(results) do
-    results
-      |> Enum.map(fn result -> result[:count] end)
-      |> Poison.encode!(results)
+    mapped_results = results |> Enum.map(fn result -> [result[:week_number], result[:count]] end)
+    ([["Week", "Count"]] ++ mapped_results) |> Poison.encode!
   end
 
 end
