@@ -11,7 +11,7 @@ defmodule BooklistWeb.ReportsController do
       {:ok, rating} -> rating
       _             -> nil
     end
-    ratings_count_by_week = Reports.get_ratings_count_by_week(year)
+    ratings_count_by_week = Reports.get_ratings_count_by_week(year, year == Date.utc_today.year)
 
     render(conn, "show.html", year: year, rating_stats: rating_stats, lowest_rating: lowest_rating, highest_rating: highest_rating, top_ratings: top_ratings, ratings_count_by_week: ratings_count_by_week)
   end
