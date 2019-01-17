@@ -7,6 +7,7 @@ defmodule Mix.Tasks.Teamster do
   alias Booklist.RepoLegacy
 
   alias Teamster.Models.LegacyGenre
+  alias Teamster.Models.LegacyAuthor
 
   @moduledoc """
   Mix tasks to migrate the book_list rails database data to the booklist phoenix application 
@@ -19,6 +20,9 @@ defmodule Mix.Tasks.Teamster do
 
     genres = RepoLegacy.all(from(LegacyGenre, order_by: [:id]))
     migrate_legacy_models(genres, LegacyGenre)
+
+    authors = RepoLegacy.all(from(LegacyAuthor, order_by: [:id]))
+    migrate_legacy_models(authors, LegacyAuthor)
   end
 
 
