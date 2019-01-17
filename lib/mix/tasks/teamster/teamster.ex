@@ -6,9 +6,6 @@ defmodule Mix.Tasks.Teamster do
   alias Booklist.Repo
   alias Booklist.RepoLegacy
 
-  alias Teamster.Models.LegacyGenre
-  alias Teamster.Models.LegacyAuthor
-
   @moduledoc """
   Mix tasks to migrate the book_list rails database data to the booklist phoenix application 
   """
@@ -18,13 +15,16 @@ defmodule Mix.Tasks.Teamster do
     #start app so repo is available
     Mix.Task.run "app.start", []
 
-    genres = RepoLegacy.all(from(LegacyGenre, order_by: [:id]))
-    migrate_legacy_models(genres, LegacyGenre)
-
-    authors = RepoLegacy.all(from(LegacyAuthor, order_by: [:id]))
-    migrate_legacy_models(authors, LegacyAuthor)
+    migrate(Teamster.Models.LegacyAuthor)
+    migrate(Teamster.Models.LegacyGenre)
+    migrate(Teamster.Models.LegacyLibrary)
   end
 
+  defp migrate(model_module) when is_atom(model_module) do
+  	from(model_module, order_by: [:id])
+  		|> RepoLegacy.all
+  		|> migrate_legacy_models(model_module)
+  end
 
   defp migrate_legacy_models(legacy_models, module_name) when is_atom(module_name) do
   	for legacy_model <- legacy_models do
