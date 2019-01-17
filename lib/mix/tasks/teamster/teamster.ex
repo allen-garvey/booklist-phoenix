@@ -20,6 +20,7 @@ defmodule Mix.Tasks.Teamster do
     migrate(Teamster.Models.LegacyLibrary)
     migrate(Teamster.Models.LegacyLocation)
     migrate(Teamster.Models.LegacyLoan)
+    migrate(Teamster.Models.LegacyBook)
   end
 
   defp migrate(model_module) when is_atom(model_module) do
