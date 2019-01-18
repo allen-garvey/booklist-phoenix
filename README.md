@@ -10,7 +10,7 @@ A CMS to keep track of the books you want to read, and their library availabilit
 ## Getting Started
 
 * Install dependencies with `mix deps.get`
-* Create and migrate your database with `mix ecto.setup`
+* Create and migrate your database with `mix ecto.setup -r Booklist.Repo`
 * Install Node.js dependencies with `cd assets && npm install`
 * Start Phoenix endpoint with `mix phx.server`
 * Now you can visit [`localhost:5050`](http://localhost:5050) from your browser.
