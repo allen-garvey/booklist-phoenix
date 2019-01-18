@@ -263,6 +263,14 @@ defmodule Booklist.Admin do
   end
 
   @doc """
+  Gets books with no location and whether or not they are active
+  """
+  def list_books_no_location(is_active) when is_boolean(is_active) do
+    from(b in Book, where: fragment("? NOT IN (SELECT DISTINCT book_id FROM book_locations)", b.id) and b.is_active == ^is_active and b.on_bookshelf == false, order_by: [:sort_title, :id])
+      |> Repo.all
+  end
+
+  @doc """
   Gets a single book.
 
   Raises `Ecto.NoResultsError` if the Book does not exist.

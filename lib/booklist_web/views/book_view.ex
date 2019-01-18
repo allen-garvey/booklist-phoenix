@@ -56,6 +56,13 @@ defmodule BooklistWeb.BookView do
   end
 
   @doc """
+  Path for books that have no location
+  """
+  def no_location_active_book_path(conn) do
+    Routes.book_path(conn, :index, active: "true", location: "false")
+  end
+
+  @doc """
   Button text for button to change book's is_active property
   Argument is book's current is_active property
   """
