@@ -250,15 +250,7 @@ defmodule Booklist.Admin do
   end
 
   def list_books_read_query(false) do
-    from(b in Book, where: not(b.id in ^rated_book_ids()), order_by: [:sort_title, :id])
-  end
-
-  @doc """
-  Returns the list of book ids that have ratings
-  """
-  def rated_book_ids do
-    from(r in Rating, distinct: r.book_id, select: r.book_id)
-      |> Repo.all
+    from(b in Book, where: fragment("? NOT IN (SELECT DISTINCT book_id FROM ratings)", b.id), order_by: [:sort_title, :id])
   end
 
   @doc """
