@@ -75,9 +75,9 @@ config :booklist, Booklist.Repo,
   pool_size: 10
 
 # Legacy rails repo
-config :booklist, Booklist.RepoLegacy,
-  username: "postgres",
-  password: "postgres",
-  database: "book_list",
-  hostname: "localhost",
-  pool_size: 10
+# config :booklist, Booklist.RepoLegacy,
+#   username: "postgres",
+#   password: "postgres",
+#   database: "book_list",
+#   hostname: "localhost",
+#   pool_size: 10
