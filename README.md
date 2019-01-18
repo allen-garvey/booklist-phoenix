@@ -15,6 +15,13 @@ A CMS to keep track of the books you want to read, and their library availabilit
 * Start Phoenix endpoint with `mix phx.server`
 * Now you can visit [`localhost:5050`](http://localhost:5050) from your browser.
 
+## Custom mix tasks
+
+* There is a custom mix task `mix teamster` to migrate the database from [booklist-rails](https://github.com/allen-garvey/booklist-rails)
+* To run this task, first configure the legacy database location in `config/dev.exs`
+* Then enable the legacy repo on application start by uncommenting the line in `lib/booklist/application.ex`
+* Then run `mix teamster`
+
 ## License
 
 Booklist-phoenix is released under the MIT License. See license.txt for more details.
