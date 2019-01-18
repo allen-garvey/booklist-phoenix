@@ -39,7 +39,12 @@ function displayQrCode(caller){
 	const qrCodeElement = document.createElement('div');
 	fragment.appendChild(qrCodeElement);
 	
-	if(qrCodeContent){
+	//length is limited to QR Code version 40, which has 4296 character limit
+	const qrCodeLengthLimit = 4296;
+	if(qrCodeContent.length > qrCodeLengthLimit){
+		modalAlert({bodyText: `QR Code limited to ${qrCodeLengthLimit} characters!`});
+	}
+	else if(qrCodeContent){
 		modalAlert({bodyFragment : fragment});
 		generateQrCode(qrCodeContent, qrCodeElement);
 	}
@@ -50,17 +55,11 @@ function displayQrCode(caller){
 };
 
 function generateQrCode(textContent, qrCodeElement){
-	//note that is limited to QR Code version 40, which has 4296 character limit
-	try{
-		qrCodeGenerator(qrCodeElement, {
-			text : textContent,
-			width : 500,
-			height : 500
-		});	
-	}
-	catch(e){
-		console.log(e);
-	}
+	qrCodeGenerator(qrCodeElement, {
+		text : textContent,
+		width : 500,
+		height : 500
+	});	
 };
 
 
