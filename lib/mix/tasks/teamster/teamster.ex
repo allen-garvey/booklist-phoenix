@@ -12,7 +12,8 @@ defmodule Mix.Tasks.Teamster do
 
   @shortdoc "Migrates data from book_list rails to current booklist phoenix application"
   def run(_) do
-    #start app so repo is available
+    # start app so repo is available
+    # make sure RepoLegacy is started in application.ex
     Mix.Task.run "app.start", []
 
     migrate(Teamster.Models.LegacyAuthor)
