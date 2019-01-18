@@ -420,7 +420,7 @@ defmodule Booklist.Admin do
   """
   def get_library!(id) do
     book_location_query = from(b_l in BookLocation, join: book in assoc(b_l, :book), left_join: author in assoc(book, :author), preload: [book: {book, [author: author]}], where: book.is_active == true and book.on_bookshelf == false, order_by: book.sort_title)
-    location_query = from(l in Location, preload: [book_locations: ^book_location_query])
+    location_query = from(l in Location, preload: [book_locations: ^book_location_query], order_by: [:name, :id])
 
     Repo.get!(Library, id)
       |> Repo.preload([locations: location_query])
