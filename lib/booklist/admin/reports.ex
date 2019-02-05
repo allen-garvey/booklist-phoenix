@@ -35,8 +35,27 @@ defmodule Booklist.Reports do
   https://angelika.me/2016/09/10/how-to-order-by-the-result-of-select-count-in-ecto/
   """
   def get_ratings_count_by_week_base_query(year) do
-  	#need to check for nil in where clause for left joins to work
-	from(r in Rating, right_join: week_number in fragment("SELECT generate_series(1,53) AS week_number"), on: fragment("week_number = extract(week FROM ?)", r.date_scored), where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year or is_nil(r.id), group_by: [fragment("week_number")], select: %{week_number: fragment("week_number"), count: count(r.id)}, order_by: [fragment("week_number")])
+  	#need to create rating subquery or weeks with 0 ratings won't be returned
+    rating_subquery = from(
+      r in Rating,
+      where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year,
+      select: %{
+        id: r.id,
+        date_scored: r.date_scored,
+      }
+    )
+
+    from(
+      r in subquery(rating_subquery), 
+      right_join: week_number in fragment("SELECT generate_series(1,53) AS week_number"), 
+      on: fragment("week_number = extract(week FROM ?)", r.date_scored), 
+      group_by: [fragment("week_number")], 
+      select: %{
+        week_number: fragment("week_number"), 
+        count: count(r.id)
+      }, 
+      order_by: [fragment("week_number")]
+    )
   end
 
   def get_ratings_count_by_week_query(year, should_limit) when is_boolean(should_limit) do
