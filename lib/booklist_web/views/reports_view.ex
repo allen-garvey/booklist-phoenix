@@ -6,7 +6,14 @@ defmodule BooklistWeb.ReportsView do
   """
   def reports_for_current_year_path(conn) do
     current_year = Date.utc_today.year
-    Routes.reports_path(conn, :show, current_year)
+    reports_for_year_path(conn, current_year)
+  end
+
+  @doc """
+  Returns a link to the reports for the given year
+  """
+  def reports_for_year_path(conn, year) do
+    Routes.reports_path(conn, :show, year)
   end
 
   @doc """

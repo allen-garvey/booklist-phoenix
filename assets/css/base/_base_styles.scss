@@ -82,3 +82,9 @@ figure{
 .hidden{
 	display: none;
 }
+
+.spread_content{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
