@@ -58,7 +58,7 @@ defmodule Booklist.Reports do
     )
   end
 
-  def get_ratings_count_by_week_query(year, should_limit) when is_boolean(should_limit) do
+  def get_ratings_count_by_week_query(year, should_limit) do
   	case should_limit do
   		#limit results only to weeks in current year
   		true  -> get_ratings_count_by_week_base_query(year) |> limit(fragment("SELECT EXTRACT(WEEK FROM current_timestamp)"))
