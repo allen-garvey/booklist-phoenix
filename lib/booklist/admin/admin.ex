@@ -250,7 +250,12 @@ defmodule Booklist.Admin do
   end
 
   def list_books_read_query(false) do
-    from(b in Book, where: fragment("? NOT IN (SELECT DISTINCT book_id FROM ratings)", b.id), order_by: [:sort_title, :id])
+    from(
+        b in Book,
+        left_join: rating in assoc(b, :ratings),
+        where: is_nil(rating.book_id),
+        order_by: [:sort_title, :id]
+      )
   end
 
   @doc """
@@ -266,7 +271,14 @@ defmodule Booklist.Admin do
   Gets books with no location and whether or not they are active
   """
   def list_books_no_location(is_active) when is_boolean(is_active) do
-    from(b in Book, where: fragment("? NOT IN (SELECT DISTINCT book_id FROM book_locations)", b.id) and b.is_active == ^is_active and b.on_bookshelf == false, order_by: [:sort_title, :id])
+    from(
+        b in Book,
+        left_join: book_location in assoc(b, :book_locations),
+        where:
+          is_nil(book_location.book_id)
+          and b.is_active == ^is_active
+          and b.on_bookshelf == false,
+        order_by: [:sort_title, :id])
       |> Repo.all
   end
 
